@@ -1,0 +1,666 @@
+html, body{
+    height: 100%;
+    width: 100%;
+}
+body{
+    background-color: black;
+    color: black;
+}
+a{
+    cursor: pointer;
+}
+.card-body{
+    background-position: inherit;
+    text-align:center;
+}
+.InfoIns{
+    text-align: center;
+}
+.InfoIndex{
+    text-align: center;
+}
+.card-body{
+    margin-top: inherit;
+
+}
+.tituloindex{
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    text-align: center;
+    height: 300px;
+    width: 700px;
+    position: absolute;
+    margin: 0px auto;
+    color: rgba(255,255,255,0.8);
+    left: calc(50% - 350px);
+    top: calc(50% - 150px);
+}
+.tituloindex h2{
+    text-align: center;
+}
+.tituloindex h5{
+    font-size: 18px;
+    text-align: right;
+}
+.sobreIndex{
+    margin-top: -100px;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    text-align: center;
+    height: 300px;
+    width: 700px;
+    position: absolute;
+    color: rgba(255,255,255,0.8);
+    left: calc(50% - 350px);
+    top: calc(50% - 150px);
+}
+.sobreIndex h2{
+    text-align: center;
+}
+.sobreIndex h5{
+    font-size: 18px;
+    text-align: right;
+}
+
+#apresentacaocomentario{
+    width: 100%;
+    position: relative;
+    background-color: #333;
+
+}
+.SaibaMais{
+    height: 180px;
+    width: 500px;
+    position: absolute;
+    top: 70px;
+    left: calc(50% - 250px);
+    text-align: center;
+    margin-bottom: 80px;
+}
+#apresentacao{
+    width: 100%;
+    position: relative;
+    background-color: #333;
+}
+#apresentacaoistrutores{
+    width: 100%;
+    position: relative;
+    background-color: #333;
+}
+.lead{
+    margin-top: auto;
+    border-color: black;
+    text-align: center;
+    font-size: 1.25rem;
+    font-weight: 300;
+}
+.imagemLogo{
+    padding: 0px;
+    margin: 20px 0px;
+    height: 35px;
+}
+#barraMenu{
+    font-family: inherit;
+}
+.navbar-default{
+    position: fixed;
+    top: 0px;
+    height: 10%;
+    width: 100%;
+    z-index: 1;
+    font-size: 15px;
+    border-radius: 0px;
+    border-style: none;
+    background-color: black;
+    padding: 5px 0px;
+}
+.container-fluid{
+    margin: 0px 30px;
+}
+.navbar a{
+    color: grey;
+}
+.navbar a:visited{
+    color: white;
+}
+.navbar-header h3{
+    padding: 0px;
+    color: white;
+    margin: 0px;
+    font-weight: 300;
+}
+.navbar-brand a{
+    padding: 20px 0px;
+}
+.menu{
+    position: absolute;
+    width: 200px;
+    height: 1000px;
+    background-color: black;
+    left: calc(100%);
+    transition: 1s;
+}
+.navbar-right{
+    margin-top: 20px;
+    margin-right: 5px;
+}
+.menu ul:nth-child(2){
+    border-top: solid;
+    border-bottom: solid;
+}
+.menu li{
+    margin: 10px 0px;
+    list-style: none;
+    font-weight: 300;
+    color: #888;
+}
+.menu h2{
+    margin-left: 25px;
+    margin-top: 80px;
+    margin-bottom: 50px;
+    font-weight: 300;
+    color: #bbb;
+}
+.botaoMenu{
+
+    color: white;
+    text-align: center;
+    right: 50px;
+    position: absolute;
+    z-index: 500;
+}
+.botaoMenu:after{
+    content:'MENU';
+}
+#navicon{
+    display: none;
+}
+#navicon:checked + label:after{
+    content: 'X';
+}
+#navicon:checked ~ .menu{
+    transition: 1s;
+    left: calc(100% - 200px);
+}
+.linha{
+    clear: both;
+}
+
+
+
+#topo-instrutores{
+    height: 100%;
+    width: 100%;
+    background-image: url("../img/home/Background.jpg");
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center;
+    background-size: cover;
+    position: relative;
+}
+#topo{
+    height: 100%;
+    width: 100%;
+    background-image: url("../img/home/Background.jpg");
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center;
+    background-size: cover;
+    position: relative;
+}
+#topoSobre{
+    height: 100%;
+    width: 100%;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center;
+    background-size: cover;
+    position: relative;
+}
+#topoTabelas{
+    height: 100%;
+    width: 100%;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center;
+    background-size: cover;
+    position: relative;
+}
+.transparencia-fundo{
+    background-color: rgba(0,0,0,0.5);
+    height: 100%;
+    width: 100%;
+}
+.transparencia-fundo-sobre{
+    background-color:#4f4f4f;
+    height: 100%;
+    width: 100%;
+}
+
+.card{
+    align-content: center;
+}
+#topo h1{
+    text-align: center;
+    color: white;
+    font-weight: bolder;
+    font-size: 50px;
+}
+#sectionreceita1{
+    width: 100%;
+    position: relative;
+}
+.titulo{
+    margin: 150px 0px 15px 0px;
+    height: 250px;
+    width: 500px;
+    left: calc(50% - 250px);
+    text-align: center;
+
+}
+.titulo h1{
+    width: 100%;
+    color: white;
+    margin-bottom: 50px;
+}
+.botaoLink a{
+    border-radius: 50px;
+    padding: 10px 25px;
+    margin-top: 100px;
+    text-align: center;
+    width: 100px;
+    list-style: none;
+    border: solid;
+    border-color: white;
+    border-width: medium;
+    color: white;
+}
+.botaolink a:hover{
+    cursor: pointer;
+    transition: 0.5s;
+    border-color: blue;
+}
+#principais{
+    position: relative;
+    margin-top: 100px;
+    text-align: center;
+}
+.imgPrincipais{
+    margin-bottom: 35px;
+}
+.imgPrincipais img{
+    border: solid;
+    border-color: rgba(255,255,255,0.8);
+    border-width: medium;
+}
+
+#principais h1, h3, p{
+    font-family: inherit;
+    font-weight: 300;
+}
+#principais h3{
+    font-size: 35px;
+}
+.tituloPagina h1{
+    margin-bottom: 35px;
+}
+.artigo{
+}
+.conteudo{
+    margin-top: 150px;
+}
+.conteudo h1{
+    text-align: center;
+    font-family: inherit;
+    font-weight: 300;
+    color: white;
+}
+.conteudo p{
+    margin-left: 15px;
+    font-size: 20px;
+    font-family: inherit;
+    font-weight: 400;
+    color: white;
+}
+.conteudo img{
+    margin: 10px;
+}
+
+.cardsInstrutores{
+    text-align: center;
+}
+
+#footer{
+    background-color: black;
+    padding: 70px 0px;
+}
+.icons{
+    text-align: center;
+    color: #aaa;
+    font-size: 40px;
+}
+.fa{
+    padding: 0px 15px;
+    margin-bottom: 40px;
+    margin-top: 30px;
+    transition: 0.5s;
+}
+.fa:hover{
+    color: white;
+    transition: 0.5s;
+}
+.copyright{
+    color: rgba(255, 255, 255, 0.5);
+    font-family: helvetica;
+    text-align: center;
+    font-weight: 400;
+    margin-bottom: 0px;
+}
+.
+
+
+
+.transparencia-fundo{
+    background-color: rgba(0,0,0,0.5);
+    height: 100%;
+    width: 100%;
+}
+#topo h1{
+    text-align: center;
+    color: white;
+    font-weight: bolder;
+    font-size: 50px;
+}
+
+.botaoLink a{
+    border-radius: 50px;
+    padding: 10px 25px;
+    margin-top: 100px;
+    text-align: center;
+    width: 100px;
+    list-style: none;
+    border: solid;
+    border-color: white;
+    border-width: medium;
+    color: white;
+  }
+.botaolink a:hover{
+	cursor: pointer;
+	transition: 0.5s;
+	border-color: blue;
+}
+
+.foter{
+    background-color: black;
+    padding: 70px 0px;
+}
+.icons{
+    text-align: center;
+    color: #aaa;
+    font-size: 40px;
+}
+.fa{
+    padding: 0px 15px;
+    margin-bottom: 40px;
+    margin-top: 30px;
+    transition: 0.5s;
+}
+.fa:hover{
+    color: white;
+    transition: 0.5s;
+}
+.copyright{
+    color: rgba(255, 255, 255, 0.5);
+    font-family: helvetica;
+    text-align: center;
+    font-weight: 400;
+    margin-bottom: 0px;
+}
+
+
+
+
+         /* CSS Cadastro */
+
+
+#principal {
+    max-width: 960px;
+    padding: 0px;
+    margin: auto;
+}
+
+.formCad{
+    border-radius: 15px;
+    width: 80%;
+    margin: 0 auto;
+    margin-top: -65px;
+    padding: 0px 20px;
+    padding-top: 40px;
+    background: #FFFFFF;
+    border: 1px solid rgba(112, 112, 112, 0.16);
+    box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.16);
+    padding: 2%!important;
+    margin-bottom: 10%;
+}
+
+.formCad h1{
+    font-size: 25px;
+    color: grey;
+    font-family: arial;
+    text-shadow: 1px 1px 2.5px #d3d3d3;
+    padding-left: 2%;
+    padding-top: 2%;
+}
+
+.formCad {
+    padding-left: 2%;
+    display: inline-block;
+    padding-top: 2%;
+    letter-spacing: 1px;
+    color: #c7c7c7;
+    font-family: arial;
+    margin-bottom: 0px!important;
+    font-size: 15px;
+}
+
+
+.pt1{
+    padding-left: 2%;
+}
+
+.pt2{
+    padding-left: 2%;
+}
+
+.pt1, .pt2 {
+    margin-bottom: 7%!important;
+    width: 45%;
+    display: inline-block;
+    float: left;
+    margin: auto;
+}
+
+
+
+#select{
+    padding: 2%;
+    width: 87%;
+    border: 1px solid rgba(112, 112, 112, 0.21);
+}
+
+.pt1 p, .pt2 p{
+    letter-spacing: 0.1px!important;
+    padding-left: 0%;
+    color: rgba(0,0,0,0.4);
+    margin-top:2%;
+    margin-bottom: 2%!important;
+    color: grey;
+}
+
+.pt1 input,.pt2 input{
+    border: 1px solid rgba(112, 112, 112, 0.21);
+    padding: 2%!important;
+    width: 80%;
+}
+
+.formCad form>input{
+    padding: 2.2% 2%;
+    color: white;
+    cursor: pointer;
+    margin-bottom: 2%;
+    box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.16);
+}
+.formCad form> a input{
+    padding: 2.2% 2%;
+    color: white;
+    cursor: pointer;
+    margin-bottom: 2%;
+    box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.16);
+}
+
+.formCad form>a{
+    width: auto!important;
+}
+
+#data{
+    padding: 2%;
+}
+
+#cancelar{
+    background-color: #c9c9c9;
+    border:none;
+    border-radius: 8px;
+    margin-left: 67%;
+    font-size: 15px;
+    box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.16);
+}
+
+#cancelar:hover{
+    background-color: #616161;
+    transition: 0.3s;
+}
+
+#cadastrar{
+    font-size: 15px;
+    background-color: #c9c9c9;
+    border:none;
+    border-radius: 8px;
+    box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.16);
+}
+
+#cadastrar:hover{
+    background-color:#616161;
+    transition: 0.3s;
+}
+
+/* CSS Recuperação de Senha*/
+
+
+.pt1Rec{
+    display: inline-block;
+    width: 80%;
+    margin-left: 10%;
+    margin-top: 1%;
+}
+
+.pt1Rec p{
+    letter-spacing: 0.1px!important;
+    width: 80%;
+    padding: 2!important;
+    margin-bottom: 2%!important;
+
+}
+
+.pt1Rec input{
+    border: 1px solid rgba(112, 112, 112, 0.21);
+    margin-bottom: 6%;
+    width: 80%;
+    padding: 10px;
+}
+
+
+
+.botoes{
+    margin-top: 5%;
+    margin-bottom: 3%;
+}
+.botoes a input{
+    margin: 0!important;
+    display: inline-block;
+    width: 80%;
+}
+
+#cancelarRec{
+    cursor: pointer;
+    width: 32%;
+    font-weight: bold;
+    color: white;
+    background-color: #c9c9c9;
+    border:none;
+    border-radius: 8px;
+    font-size: 15px;
+    padding: 4%;
+    box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.16);
+}
+
+#cancelarRec:hover{
+    background-color: #616161;
+    transition: 0.3s;
+}
+
+#cadastrarRec{
+    cursor: pointer;
+    width: 32%;
+    font-weight: bold;
+    color: white;
+    margin-left: 3%!important;
+    padding: 4%;
+    font-size: 15px;
+    background-color: #c9c9c9;
+    border:none;
+    border-radius: 8px;
+    box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.16);
+}
+
+#cadastrarRec:hover{
+    background-color:#616161;
+    transition: 0.3s;
+}
+.one{
+    color: #0062cc;
+}
+.Sobrerow{
+    text-align-last: center;
+    color:black;
+}
+.allRow{
+    margin-left: 100px;
+    text-align-last: center;
+}
+.InstrutoresRow{
+    align-content: center;
+    margin-left: 300px;
+    text-align-last: center;
+}
+
+.Tabelas{
+    margin-top: +100px;
+    margin-left: auto;
+    margin-right: auto;
+    alignment: center;
+    width: 800px;
+    height:800px;
+}
+.card-body{
+    text-align: left;
+}
+.Registro{
+    margin-top: +200px;
+    margin-left: auto;
+    margin-right: auto;
+    alignment: center;
+    width: 800px;
+    height: 800px;
+}

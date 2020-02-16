@@ -1,10 +1,14 @@
 package dao;
 
 import connection.FabricaConexoes;
+import model.Comentario;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -28,4 +32,24 @@ public class ComentarioDao {
         }
     }
 
+    public void inclui(Comentario c){
+        String sql = "INSERT INTO comentario "
+                + "(texto, autor, publicacao, dataPublicacao) "
+                + "values (?, ?, ?, ?)";
+        try {
+            PreparedStatement stmt = this.conexao.prepareStatement(sql);
+            stmt.setString(1, c.getTexto());
+            stmt.setInt(2, (c.getAutor()).getIdUsuario());
+            stmt.setLong(3, c.getDataComentario());
+
+            stmt.execute();
+            // Encerra o Statment
+            stmt.close();
+            // Fecha conexão BD
+            conexao.close();
+        } catch (SQLException  e) {
+            throw new RuntimeException(e);
+        }
+    }
 }
+

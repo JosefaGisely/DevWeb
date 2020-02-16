@@ -8,7 +8,7 @@ public class Administrador {
 
     // Construtores
     public Administrador(){
-
+        super();
     }
 
     public Administrador(int idAdministrador, String nomeCompleto, String login, String senha) {
@@ -57,13 +57,5 @@ public class Administrador {
         this.senha = senha;
     }
 
-    @Override
-    public String toString() {
-        return "Administrador{" +
-                "idAdministrador=" + idAdministrador +
-                ", nomeCompleto='" + nomeCompleto + '\'' +
-                ", login='" + login + '\'' +
-                ", senha='" + senha + '\'' +
-                '}';
-    }
+
 }

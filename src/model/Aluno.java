@@ -1,8 +1,8 @@
 package model;
 
-public class Usuario {
+public class Aluno {
 
-    private int idUsuario;
+    private int idAluno;
     private String cpf;
     private String nomeCompleto;
     private String email;
@@ -17,12 +17,13 @@ public class Usuario {
     private String aprovado;
 
     // Construtores
-    public Usuario(String nomeCompleto, String apelido, String email, String senha){
+    public Aluno(){
         super();
+
     }
 
-    public Usuario(int idUsuario, String cpf, String nomeCompleto, String email, String celular, String login, String senha, String endereco, String cidade, String bairro, String cep, String comentario, String aprovado) {
-        this.idUsuario = idUsuario;
+    public Aluno(int idAluno, String cpf, String nomeCompleto, String email, String celular, String login, String senha, String endereco, String cidade, String bairro, String cep, String comentario, String aprovado) {
+        this.idAluno = idAluno;
         this.cpf = cpf;
         this.nomeCompleto = nomeCompleto;
         this.email = email;
@@ -37,8 +38,8 @@ public class Usuario {
         this.aprovado = aprovado;
     }
 
-    public Usuario(String cpf, String nomeCompleto, String email, String celular, String login, String senha,
-                   String endereco, String cidade, String bairro, String cep, String comentario, String aprovado) {
+    public Aluno(String cpf, String nomeCompleto, String email, String celular, String login, String senha,
+                 String endereco, String cidade, String bairro, String cep, String comentario, String aprovado) {
         this.cpf = cpf;
         this.nomeCompleto = nomeCompleto;
         this.email = email;
@@ -54,12 +55,12 @@ public class Usuario {
     }
 
     // metodos get e set
-    public int getIdUsuario() {
-        return idUsuario;
+    public int getIdAluno() {
+        return idAluno;
     }
 
-    public void setIdUsuario(int idUsuario) {
-        this.idUsuario = idUsuario;
+    public void setIdAluno(int idAluno) {
+        this.idAluno = idAluno;
     }
 
     public String getCpf() {

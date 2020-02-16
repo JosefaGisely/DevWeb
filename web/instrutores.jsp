@@ -44,6 +44,15 @@
                 </div>
             </div>
         </div>
+        <div>
+            <h2>Login</h2>
+            <ul>
+                <div class="navicon">
+                    <a class="btn btn-outline-light my-2 my-sm-0" href="login.jsp">Entrar</a>
+                    <a class="btn btn-outline-light my-2 my-sm-0" href="registros.jsp">Cadastrar</a>
+                </div>
+            </ul>
+        </div>
     </nav>
 </div>
 </header>

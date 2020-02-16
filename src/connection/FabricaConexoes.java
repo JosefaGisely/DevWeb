@@ -5,12 +5,12 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 
 public class FabricaConexoes {
-    private Connection conexao;
+    private Connection connection = getConnection();
 
     public static Connection getConnection(){
         try {
             Class.forName("com.mysql.jdbc.Driver");
-            return DriverManager.getConnection("jdbc:mysql://localhost:3306/");
+            return DriverManager.getConnection("jdbc:mysql://localhost:3306/Cursos", "root", "" );
         }catch (Exception e){
             throw new RuntimeException(e);
         }
@@ -19,8 +19,8 @@ public class FabricaConexoes {
     // Metodo que fecha conexao com o banco de dados.
     public void closeConnection() {
         try {
-            if (conexao != null) {
-                conexao.close();
+            if (connection != null) {
+                connection.close();
             }
         } catch (Exception e) {
             e.printStackTrace();

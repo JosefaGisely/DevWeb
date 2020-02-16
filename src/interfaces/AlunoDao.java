@@ -1,7 +1,8 @@
-package dao;
+package interfaces;
 
 import connection.FabricaConexoes;
-import model.Usuario;
+import model.Aluno;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -11,14 +12,16 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class UsuarioDao implements Dao {
+public class AlunoDao implements Dao{
 
-    private Connection conexao;
+    private Connection connection;
 
-    public UsuarioDao() throws SQLException {}
+    public AlunoDao() throws SQLException {
+        this.connection = new FabricaConexoes().getConnection();
+    }
 
-    @Override
-    public void inclui(Usuario u) {
+
+    public void inclui(Aluno aluno) {
     // inserir dados em uma tabela de um banco de dados SQL
     String sql =
         "INSERT INTO escola.aluno "
@@ -28,36 +31,36 @@ public class UsuarioDao implements Dao {
     // preenche os valores
     try {
         PreparedStatement stmt = FabricaConexoes.getConnection().prepareStatement(sql);
-        stmt.setString(1, u.getCpf());
-        stmt.setString(2, u.getNomeCompleto());
-        stmt.setString(3, u.getEmail());
-        stmt.setString(4, u.getCelular());
-        stmt.setString(5, u.getLogin());
-        stmt.setString(6, u.getSenha());
-        stmt.setString(7, u.getEndereco());
-        stmt.setString(8, u.getCidade());
-        stmt.setString(9, u.getBairro());
-        stmt.setString(10, u.getCep());
-        stmt.setString(11, u.getComentario());
-        stmt.setString(12, u.getAprovado());
+        stmt.setString(1, aluno.getCpf());
+        stmt.setString(2, aluno.getNomeCompleto());
+        stmt.setString(3, aluno.getEmail());
+        stmt.setString(4, aluno.getCelular());
+        stmt.setString(5, aluno.getLogin());
+        stmt.setString(6, aluno.getSenha());
+        stmt.setString(7, aluno.getEndereco());
+        stmt.setString(8, aluno.getCidade());
+        stmt.setString(9, aluno.getBairro());
+        stmt.setString(10, aluno.getCep());
+        stmt.setString(11, aluno.getComentario());
+        stmt.setString(12, aluno.getAprovado());
 
         // Executa o Statment
         stmt.execute();
         // Encerra o Statment
         stmt.close();
         // Fecha conexão BD
-        conexao.close();
+        connection.close();
     }catch (SQLException e) {
         throw new RuntimeException(e);
         }
     }
 
-    public List<Usuario> listaTodos(Usuario u) throws SQLException {
+    public List<Aluno> listaTodos(Aluno aluno) throws SQLException {
     try {
         // Cria uma lista de usuários
-        List<Usuario> usuariosList = new ArrayList<>();
+        List<Aluno> usuariosList = new ArrayList<>();
         // Cria o statment que contém a Query de consulta
-        PreparedStatement stmt = this.conexao.prepareStatement("SELECT * FROM usuario");
+        PreparedStatement stmt = this.connection.prepareStatement("SELECT * FROM usuario");
 
         // Cria uma varíavel para receber o resultado da Query
         ResultSet rs = stmt.executeQuery();
@@ -65,7 +68,7 @@ public class UsuarioDao implements Dao {
         // laço de repetição para percorrer todas as intâncias do ResultSet
         while (rs.next()) {
                 usuariosList.add(
-                new Usuario(
+                new Aluno(
                 rs.getInt("idUsuario"),
                 rs.getString("cpf"),
                 rs.getString("nomeCompleto"),
@@ -85,7 +88,7 @@ public class UsuarioDao implements Dao {
         // Encerra o Statment
         stmt.close();
         // Fecha conexão BD
-        conexao.close();
+        connection.close();
         // Retorna a lista de Usuários do BD
         return usuariosList;
         }catch (SQLException e) {
@@ -94,20 +97,30 @@ public class UsuarioDao implements Dao {
     }
 
     @Override
-    public Usuario busca(Usuario id) {
+    public void adiciona(Aluno aluno) {
+
+    }
+
+    @Override
+    public List<Aluno> listaTodos(List u) {
+        return null;
+    }
+
+    @Override
+    public Aluno busca(Aluno id) {
     try {
         // Cria o statment que contém a Query de consulta
         PreparedStatement stmt =
-            this.conexao.prepareStatement("SELECT * FROM usuario WHERE idUsuario = ?");
+            this.connection.prepareStatement("SELECT * FROM usuario WHERE idUsuario = ?");
         stmt.setInt(1, Integer.parseInt(String.valueOf(id)));
         // Cria uma varíavel para receber o resultado da Query
         ResultSet rs = stmt.executeQuery();
 
         // Cria usuário encontrado
-        Usuario usuario = null;
+        Aluno usuario = null;
         // Verifica se houve algum retorno
         if (rs.next()) {
-            usuario = new Usuario(
+            usuario = new Aluno(
                 rs.getInt("idUsuario"),
                 rs.getString("cpf"),
                 rs.getString("nomeCompleto"),
@@ -127,7 +140,7 @@ public class UsuarioDao implements Dao {
         // Encerra o Statment
         stmt.close();
         // Fecha conexão BD
-        conexao.close();
+        connection.close();
         // Retorna a lista de Usuários do BD
         return usuario;
         } catch (SQLException e) {
@@ -135,11 +148,16 @@ public class UsuarioDao implements Dao {
         }
     }
 
-    public Usuario buscaLogin(String email, String senha) {
+    @Override
+    public Aluno buscaPorEmail(String email) {
+        return null;
+    }
+
+    public Aluno buscaLogin(String email, String senha) {
     try {
         // Cria o statment que contém a Query de consulta
         PreparedStatement stmt =
-            this.conexao.prepareStatement(
+            this.connection.prepareStatement(
                     "SELECT * FROM usuario WHERE " + "	email = ? and " + "senha = ?");
         stmt.setString(1, email);
         stmt.setString(2, senha);
@@ -147,11 +165,11 @@ public class UsuarioDao implements Dao {
         ResultSet rs = stmt.executeQuery();
 
         // Cria usuário encontrado
-        Usuario usuario = null;
+        Aluno usuario = null;
         // Verifica se houve algum retorno
         if (rs.next()) {
         usuario =
-            new Usuario(
+            new Aluno(
                 rs.getInt("idUsuario"),
                 rs.getString("cpf"),
                 rs.getString("nomeCompleto"),
@@ -171,7 +189,7 @@ public class UsuarioDao implements Dao {
           // Encerra o Statment
         stmt.close();
         // Fecha conexão BD
-        conexao.close();
+        connection.close();
         // Retorna a lista de Usuários do BD
         return usuario;
     } catch (SQLException e) {
@@ -179,10 +197,11 @@ public class UsuarioDao implements Dao {
         }
     }
 
-    public void altera(Usuario u) {
+    @Override
+    public void altera(Aluno aluno) {
     try {
         PreparedStatement stmt =
-            this.conexao.prepareStatement(
+            this.connection.prepareStatement(
                 "UPDATE usuario "
                     + "set cpf = ?,"
                     + "nomeCompleto = ?, "
@@ -198,45 +217,46 @@ public class UsuarioDao implements Dao {
                     + "aprovado = ? "
                     + "WHERE idUsuario = ?");
 
-        stmt.setString(1, u.getCpf());
-        stmt.setString(2, u.getNomeCompleto());
-        stmt.setString(3, u.getEmail());
-        stmt.setString(4, u.getCelular());
-        stmt.setString(5, u.getLogin());
-        stmt.setString(6, u.getSenha());
-        stmt.setString(7, u.getEndereco());
-        stmt.setString(8, u.getCidade());
-        stmt.setString(9, u.getBairro());
-        stmt.setString(10, u.getCep());
-        stmt.setString(11, String.valueOf(u.getIdUsuario()));
+        stmt.setString(1, aluno.getCpf());
+        stmt.setString(2, aluno.getNomeCompleto());
+        stmt.setString(3, aluno.getEmail());
+        stmt.setString(4, aluno.getCelular());
+        stmt.setString(5, aluno.getLogin());
+        stmt.setString(6, aluno.getSenha());
+        stmt.setString(7, aluno.getEndereco());
+        stmt.setString(8, aluno.getCidade());
+        stmt.setString(9, aluno.getBairro());
+        stmt.setString(10, aluno.getCep());
+        stmt.setString(11, String.valueOf(aluno.getIdAluno()));
         System.out.println(stmt.toString());
         // Executa o Statment
         stmt.execute();
         // Encerra o Statment
         stmt.close();
         // Fecha conexão BD
-        conexao.close();
+        connection.close();
         } catch (SQLException ex) {
-            Logger.getLogger(UsuarioDao.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(AlunoDao.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
-    public void alteraSenha(Usuario u) {
+
+    public void alteraSenha(Aluno aluno) {
     try {
         PreparedStatement stmt =
-            this.conexao.prepareStatement(
+            this.connection.prepareStatement(
                 "UPDATE usuario SET " + "senha = ? " + "WHERE idUsuario = ?");
-        stmt.setString(1, u.getSenha());
-        stmt.setInt(2, (u.getIdUsuario()));
+        stmt.setString(1, aluno.getSenha());
+        stmt.setInt(2, (aluno.getIdAluno()));
         System.out.println(stmt.toString());
         // Executa o Statment
         stmt.execute();
         // Encerra o Statment
         stmt.close();
         // Fecha conexão BD
-        conexao.close();
+        connection.close();
     }catch (SQLException ex) {
-        Logger.getLogger(UsuarioDao.class.getName()).log(Level.SEVERE, null, ex);
+        Logger.getLogger(AlunoDao.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -244,30 +264,34 @@ public class UsuarioDao implements Dao {
     try {
         (new ComentarioDao()).removePorAutor(id);
         PreparedStatement stmt =
-            this.conexao.prepareStatement("DELETE FROM usuario WHERE idUsuario = ?");
+            this.connection.prepareStatement("DELETE FROM usuario WHERE idUsuario = ?");
         stmt.setInt(1, id);
         // Executa o Statment
         stmt.execute();
         // Encerra o Statment
         stmt.close();
         // Fecha conexão BD
-        conexao.close();
+        connection.close();
     } catch (SQLException ex) {
-        Logger.getLogger(UsuarioDao.class.getName()).log(Level.SEVERE, null, ex);
+        Logger.getLogger(AlunoDao.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
     @Override
     public void removePorAutor(int idUsuario) {
         try {
-            PreparedStatement stmt = this.conexao.prepareStatement("DELETE FROM comentario WHERE autor = ?");
+            PreparedStatement stmt = this.connection.prepareStatement("DELETE FROM comentario WHERE autor = ?");
             stmt.setInt(1, idUsuario);
             stmt.execute();
             stmt.close();
 
-            conexao.close();
+            connection.close();
         } catch (SQLException ex) {
-            Logger.getLogger(UsuarioDao.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(AlunoDao.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+
+    public Aluno validar(String login, String senha) {
+        return null;
     }
 }

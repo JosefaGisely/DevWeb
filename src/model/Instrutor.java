@@ -1,6 +1,6 @@
 package model;
 
-public class Instrutor {
+public class Instrutor extends Aluno {
 
     private int idInstrutor;
     private String nomeCompleto;
@@ -13,11 +13,12 @@ public class Instrutor {
 
     // Construtores
     public Instrutor(){
-        super();
+        super(request.getParameter("nomeCompleto"), request.getParameter("login"), request.getParameter("email"), request.getParameter("senha"));
 
     }
 
     public Instrutor(int idInstrutor, String nomeCompleto, String email, int valor_hora, String login, String senha, String experiencia) {
+        super(request.getParameter("nomeCompleto"), request.getParameter("login"), request.getParameter("email"), request.getParameter("senha"));
         this.idInstrutor = idInstrutor;
         this.nomeCompleto = nomeCompleto;
         this.email = email;
@@ -28,6 +29,7 @@ public class Instrutor {
     }
 
     public Instrutor(String nomeCompleto, String email, int valor_hora, String login, String senha, String experiencia) {
+        super(request.getParameter("nomeCompleto"), request.getParameter("login"), request.getParameter("email"), request.getParameter("senha"));
         this.nomeCompleto = nomeCompleto;
         this.email = email;
         this.valor_hora = valor_hora;

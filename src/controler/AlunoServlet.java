@@ -1,9 +1,8 @@
 package controler;
 
-import dao.UsuarioDao;
-import model.Usuario;
+import interfaces.AlunoDao;
+import model.Aluno;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -11,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -18,10 +18,10 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 @WebServlet(name = "AlunoServlet", urlPatterns = {"/Registros"})
-public class UsuarioServlet extends HttpServlet {
+public class AlunoServlet extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException, ParseException {
+            throws ServletException, IOException, ParseException, SQLException {
         response.setContentType("text/html;charset=UTF-8");
         switch(Integer.parseInt(request.getParameter("operacao"))){
             case 0:
@@ -55,15 +55,15 @@ public class UsuarioServlet extends HttpServlet {
     }
 
     private void criaUsuario(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException{
+            throws ServletException, IOException, SQLException {
         // Cria um novo usuário com os dados dos Form
-        Usuario usuario = new Usuario(request.getParameter("nomeCompleto"),
+        Aluno usuario = new Aluno(request.getParameter("nomeCompleto"),
                 request.getParameter("apelido"),
                 request.getParameter("email"),
                 request.getParameter("senha"));
 
         // Cria um objeto de acesso ao BD
-        UsuarioDao usuarioDao = new UsuarioDao();
+        AlunoDao usuarioDao = new AlunoDao();
     // Chama método para cadastrar usuário
         usuarioDao.inclui(usuario);
 
@@ -72,50 +72,50 @@ public class UsuarioServlet extends HttpServlet {
     }
 
     private void atualizaUsuario(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException, ParseException{
+            throws ServletException, IOException, ParseException, SQLException {
         if (request.getSession().getAttribute("usuarioLogado") == null){
             response.sendRedirect("home.jsp");
             return;
         } else{
 
-            UsuarioDao usuarioDAO = new UsuarioDao();
+            AlunoDao usuarioDAO = new AlunoDao();
 
 
             SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
             Date date = dateFormat.parse(request.getParameter("dataNascimento"));
 
-            Usuario usuario = new Usuario(
+            Aluno aluno = new Aluno(
                     request.getParameter("nomeCompleto"),
-                    request.getParameter("apelido"),
+                    request.getParameter("login"),
                     request.getParameter("email"),
                     request.getParameter("senha"));
-            usuario.setIdUsuario(Integer.valueOf(request.getParameter("idUsuario")));
+            aluno.setIdAluno(Integer.valueOf(request.getParameter("idAluno")));
 
             // Chama método para cadastrar usuário
-            usuarioDAO.altera(usuario);
+            usuarioDAO.altera(aluno);
 
-            request.getSession().setAttribute("usuarioLogado", usuario);
+            request.getSession().setAttribute("usuarioLogado", aluno);
             response.sendRedirect("feed.jsp");
         }
     }
 
     private void alteraSenha(HttpServletRequest request, HttpServletResponse response)
-            throws IOException {
-        UsuarioDao usuarioDAO = new UsuarioDao();
+            throws IOException, SQLException {
+        AlunoDao alunoDao = new AlunoDao();
 
         // Recupera o usuario da session http
-        Usuario usuario = usuarioDao.buscaPorEmail(request.getParameter("email"));
-        usuario.setSenha(request.getParameter("senha"));
+        Aluno aluno = alunoDao.buscaPorEmail(request.getParameter("email"));
+        aluno.setSenha(request.getParameter("senha"));
 
         // Chama método para cadastrar usuário
-        usuarioDAO.alteraSenha(usuario);
+        alunoDao.alteraSenha(aluno);
 
         response.sendRedirect("home.jsp");
     }
 
     private void fazLogin(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        Usuario usuario = (new UsuarioDao()).buscaLogin(
+            throws ServletException, IOException, SQLException {
+        Aluno usuario = (new AlunoDao()).buscaLogin(
                 request.getParameter("email"),
                 request.getParameter("senha")
         );
@@ -161,8 +161,8 @@ public class UsuarioServlet extends HttpServlet {
             throws ServletException, IOException {
         try {
             processRequest(request, response);
-        } catch (ParseException ex) {
-            Logger.getLogger(UsuarioServlet.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ParseException | SQLException ex) {
+            Logger.getLogger(AlunoServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -179,8 +179,8 @@ public class UsuarioServlet extends HttpServlet {
             throws ServletException, IOException {
         try {
             processRequest(request, response);
-        } catch (ParseException ex) {
-            Logger.getLogger(UsuarioServlet.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ParseException | SQLException ex) {
+            Logger.getLogger(AlunoServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

@@ -17,7 +17,7 @@ public class Aluno {
     private String aprovado;
 
     // Construtores
-    public Aluno(){
+    public Aluno(int idAluno, String cpf, String nomeCompleto, String email, String celular, String login, String senha, String endereco, String cidade, String bairro, String cep){
         super();
 
     }
@@ -38,14 +38,13 @@ public class Aluno {
         this.aprovado = aprovado;
     }
 
-    public Aluno(String cpf, String nomeCompleto, String email, String celular, String login, String senha,
-                 String endereco, String cidade, String bairro, String cep, String comentario, String aprovado) {
+    public Aluno(String nomeCompleto, String login, String email, String senha) {
         this.cpf = cpf;
-        this.nomeCompleto = nomeCompleto;
-        this.email = email;
+        this.nomeCompleto = this.nomeCompleto;
+        this.email = this.email;
         this.celular = celular;
-        this.login = login;
-        this.senha = senha;
+        this.login = this.login;
+        this.senha = this.senha;
         this.endereco = endereco;
         this.cidade = cidade;
         this.bairro = bairro;
@@ -159,4 +158,22 @@ public class Aluno {
         this.aprovado = aprovado;
     }
 
+    @Override
+    public String toString() {
+        return "Aluno{" +
+                "idAluno=" + idAluno +
+                ", cpf='" + cpf + '\'' +
+                ", nomeCompleto='" + nomeCompleto + '\'' +
+                ", email='" + email + '\'' +
+                ", celular='" + celular + '\'' +
+                ", login='" + login + '\'' +
+                ", senha='" + senha + '\'' +
+                ", endereco='" + endereco + '\'' +
+                ", cidade='" + cidade + '\'' +
+                ", bairro='" + bairro + '\'' +
+                ", cep='" + cep + '\'' +
+                ", comentario='" + comentario + '\'' +
+                ", aprovado='" + aprovado + '\'' +
+                '}';
+    }
 }

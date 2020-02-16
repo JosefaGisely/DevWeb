@@ -1,4 +1,4 @@
-package dao;
+package interfaces;
 
 import connection.FabricaConexoes;
 import model.*;
@@ -12,14 +12,13 @@ import java.util.List;
 
 public class AdministradorDao implements DaoAdm {
 
-    private Connection conexao;
+    private Connection connection;
 
     public AdministradorDao() throws SQLException {
 
     }
 
 
-    @Override
     public void incluiAluno(Aluno a) {
         // inserir dados em uma tabela de um banco de dados SQL
         String sql =
@@ -48,21 +47,20 @@ public class AdministradorDao implements DaoAdm {
             // Encerra o Statment
             stmt.close();
             // Fecha conexão BD
-            conexao.close();
+            connection.close();
         } catch (SQLException  e) {
             throw new RuntimeException(e);
         }
     }
 
 
-
     @Override
-    public List<Aluno> listaAluno(Aluno id) throws SQLException {
+    public List<Aluno> incluiAluno(Aluno id, Aluno cpf, Aluno nome, Aluno email, Aluno celular, Aluno login, Aluno Senha, Aluno Endereco, Aluno Bairro, Aluno Cidade, Aluno Cep, Aluno Aprovado) {
         try {
             // Cria uma lista de usuários
             List<Aluno> usuariosList = new ArrayList<>();
             // Cria o statment que contém a Query de consulta
-            PreparedStatement stmt = this.conexao.prepareStatement("SELECT * FROM usuario");
+            PreparedStatement stmt = this.connection.prepareStatement("SELECT * FROM usuario");
             // Cria uma varíavel para receber o resultado da Query
             ResultSet rs = stmt.executeQuery();
 
@@ -89,7 +87,7 @@ public class AdministradorDao implements DaoAdm {
             // Encerra o Statment
             stmt.close();
             // Fecha conexão BD
-            conexao.close();
+            connection.close();
             // Retorna a lista de Usuários do BD
             return usuariosList;
         } catch (SQLException  e) {
@@ -99,9 +97,14 @@ public class AdministradorDao implements DaoAdm {
     }
 
     @Override
-    public void alteraAlunos(Aluno id, Aluno cpf, Aluno nome, Aluno email, Aluno celular, Aluno login, Aluno Senha, Aluno Endereço, Aluno Bairro, Aluno Cidade, Aluno Cep) {
-        String sql = "UPDATE * FROM ALUNO WWHERE id = ?";
-        try {PreparedStatement statement = this.conexao.prepareStatement(sql);
+    public List<Aluno> listaAluno(Aluno id) throws SQLException {
+        return null;
+    }
+
+    @Override
+    public void alteraAlunos(Aluno id, Aluno cpf, Aluno nome, Aluno email, Aluno celular, Aluno login, Aluno Senha, Aluno Endereco, Aluno Bairro, Aluno Cidade, Aluno Cep) {
+        String sql = "UPDATE * FROM ALUNO WHERE id = ?";
+        try {PreparedStatement statement = this.connection.prepareStatement(sql);
             statement.execute();
             statement.close();
 
@@ -126,8 +129,9 @@ public class AdministradorDao implements DaoAdm {
     }
 
     @Override
-    public void listaIntrutor(Instrutor id) {
+    public List<Instrutor> listaIntrutor(Instrutor id) {
 
+        return null;
     }
 
     @Override
@@ -151,8 +155,9 @@ public class AdministradorDao implements DaoAdm {
     }
 
     @Override
-    public void listaCurso(Cursos id) {
+    public List<Cursos> listaCurso(Cursos id) {
 
+        return null;
     }
 
     @Override
@@ -176,8 +181,9 @@ public class AdministradorDao implements DaoAdm {
     }
 
     @Override
-    public void listaTurma(Turmas id) {
+    public List<Turmas> listaTurma(Turmas id) {
 
+        return null;
     }
 
     @Override

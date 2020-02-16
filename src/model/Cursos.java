@@ -12,8 +12,6 @@ public class Cursos {
 
     // Construtores
     public Cursos(){
-        super();
-
     }
 
     public Cursos(int idCursos, String nomeCompleto, String requisito, String ementa, Date carga_horaria, double preco) {
@@ -25,15 +23,9 @@ public class Cursos {
         this.preco = preco;
     }
 
-    public Cursos(String nomeCompleto, String requisito, String ementa, Date carga_horaria, double preco) {
-        this.nomeCompleto = nomeCompleto;
-        this.requisito = requisito;
-        this.ementa = ementa;
-        this.carga_horaria = carga_horaria;
-        this.preco = preco;
-    }
 
     // metodos get e set
+
     public int getIdCursos() {
         return idCursos;
     }
@@ -81,5 +73,4 @@ public class Cursos {
     public void setPreco(double preco) {
         this.preco = preco;
     }
-
 }

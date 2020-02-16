@@ -5,21 +5,21 @@ public class Comentario {
     private int idComentario;
     private String texto;
     private long dataComentario;
-    private Usuario autor;
+    private Aluno autor;
 
     //Construtores
     public Comentario() {
         super();
     }
 
-    public Comentario(int idComentario, String texto, long dataComentario, Usuario autor) {
+    public Comentario(int idComentario, String texto, long dataComentario, Aluno autor) {
         this.idComentario = idComentario;
         this.texto = texto;
         this.dataComentario = dataComentario;
         this.autor = autor;
     }
 
-    public Comentario(String texto, long dataComentario, Usuario autor) {
+    public Comentario(String texto, long dataComentario, Aluno autor) {
         this.texto = texto;
         this.dataComentario = dataComentario;
         this.autor = autor;
@@ -51,11 +51,11 @@ public class Comentario {
         this.dataComentario = dataComentario;
     }
 
-    public Usuario getAutor() {
+    public Aluno getAutor() {
         return autor;
     }
 
-    public void setAutor(Usuario autor) {
+    public void setAutor(Aluno autor) {
         this.autor = autor;
     }
 

@@ -53,6 +53,10 @@ public class Aluno {
         this.aprovado = aprovado;
     }
 
+    public Aluno() {
+
+    }
+
     // metodos get e set
     public int getIdAluno() {
         return idAluno;

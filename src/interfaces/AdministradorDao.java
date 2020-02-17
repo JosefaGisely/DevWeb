@@ -11,11 +11,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class AdministradorDao implements DaoAdm {
-
     private Connection connection;
 
-    public AdministradorDao() throws SQLException {
 
+    public AdministradorDao() throws SQLException {
+        this.connection = FabricaConexoes.getConnection();
     }
 
 

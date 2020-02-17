@@ -59,8 +59,8 @@
             <br>
             <form action="login.jsp" method="POST">
                 <div class="pt1Rec">
-                    <p>E-mail:</p>
-                    <input type="email" name="email" required>
+                    <p>Login:</p>
+                    <input type="email" name="login" required>
                     <p>Insira a Senha:</p>
                     <input type="password" name="senha" required>
 
@@ -71,6 +71,32 @@
                 </div>
             </form>
         </div>
+
+        <!-- validaçao do formulario -->
+        <script type="text/javascript">
+            function validar_form_contato(){
+                var email= formcontato.email.value;
+                var senha= formcontato.senha.value;
+
+                if(email === "" || email.indexOf('@')=== -1 || nome.length < 4 || endereco.length > 50){
+                    alert("Campo E-mail obrigatório")
+                    formcontato.email.focus();
+                    return false;
+                }
+
+                if(senha === "" || senha.length < 3){
+                    alert("Campo Senha é obrigatório, preencha o campo senha com o mínimo de 6 caracteres")
+                    formcontato.senha.focus();
+                    return false;
+                }
+                if(senha.length < 5 || senha.length > 255){
+                    alert("Preencha o campo senha com o mínimo de 6 caracteres!")
+                    formcontato.senha.focus();
+                    return false;
+                }
+            }
+        </script>
+
 
         <script src="https://unpkg.com/@popperjs/core@2.0.0"></script>
         <script src= "js/jquery-1.11.0.min.js"></script>

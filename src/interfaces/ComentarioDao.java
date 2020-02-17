@@ -10,20 +10,22 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class ComentarioDao {
-    private Connection conexao;
+    private Connection connection;
 
-    public ComentarioDao() {
-        this.conexao = new FabricaConexoes().getConnection();
+
+    public ComentarioDao() throws SQLException {
+        this.connection = FabricaConexoes.getConnection();
     }
+
 
     public void removePorAutor(int idUsuario) {
         try {
-            PreparedStatement stmt = this.conexao.prepareStatement("DELETE FROM comentario WHERE autor = ?");
+            PreparedStatement stmt = this.connection.prepareStatement("DELETE FROM comentario WHERE autor = ?");
             stmt.setInt(1, idUsuario);
             stmt.execute();
             stmt.close();
 
-            conexao.close();
+            connection.close();
         } catch (SQLException ex) {
             Logger.getLogger(AlunoDao.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -34,16 +36,16 @@ public class ComentarioDao {
                 + "(texto, autor, publicacao, dataPublicacao) "
                 + "values (?, ?, ?, ?)";
         try {
-            PreparedStatement stmt = this.conexao.prepareStatement(sql);
+            PreparedStatement stmt = this.connection.prepareStatement(sql);
             stmt.setString(1, c.getTexto());
-            stmt.setInt(2, (c.getAutor()).getIdUsuario());
+            stmt.setInt(2, (c.getAutor()).getIdAluno());
             stmt.setLong(3, c.getDataComentario());
 
             stmt.execute();
             // Encerra o Statment
             stmt.close();
             // Fecha conexão BD
-            conexao.close();
+            connection.close();
         } catch (SQLException  e) {
             throw new RuntimeException(e);
         }

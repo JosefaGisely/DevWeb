@@ -17,7 +17,7 @@ public class AlunoDao implements Dao{
     private Connection connection;
 
     public AlunoDao() throws SQLException {
-        this.connection = new FabricaConexoes().getConnection();
+        this.connection = FabricaConexoes.getConnection();
     }
 
 
@@ -291,7 +291,7 @@ public class AlunoDao implements Dao{
         }
     }
 
-    public Aluno validar(String login, String senha) {
-        return null;
-    }
+   //  Aluno validar(String login, String senha) {
+
+    //}
 }

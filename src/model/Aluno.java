@@ -3,26 +3,42 @@ package model;
 public class Aluno {
 
     private int idAluno;
-    private String cpf;
+    private int cpf;
     private String nomeCompleto;
     private String email;
-    private String celular;
+    private int celular;
     private String login;
     private String senha;
     private String endereco;
     private String cidade;
     private String bairro;
-    private String cep;
+    private int cep;
     private String comentario;
     private String aprovado;
 
     // Construtores
-    public Aluno(int idAluno, String cpf, String nomeCompleto, String email, String celular, String login, String senha, String endereco, String cidade, String bairro, String cep){
-        super();
+    public Aluno() {}
 
+
+    public Aluno(int cpf, String nomeCompleto, String email, int celular, String login, String senha,
+                 String endereco, String cidade, String bairro, int cep, String comentario, String aprovado){
+
+        this.cpf = cpf;
+        this.nomeCompleto = nomeCompleto;
+        this.email = email;
+        this.celular = celular;
+        this.login = login;
+        this.senha = senha;
+        this.endereco = endereco;
+        this.cidade = cidade;
+        this.bairro = bairro;
+        this.cep = cep;
+        this.comentario = comentario;
+        this.aprovado = aprovado;
     }
 
-    public Aluno(int idAluno, String cpf, String nomeCompleto, String email, String celular, String login, String senha, String endereco, String cidade, String bairro, String cep, String comentario, String aprovado) {
+    public Aluno(int idAluno, int cpf, String nomeCompleto, String email, int celular, String login, String senha,
+                 String endereco, String cidade, String bairro, int cep, String comentario, String aprovado) {
         this.idAluno = idAluno;
         this.cpf = cpf;
         this.nomeCompleto = nomeCompleto;
@@ -38,39 +54,27 @@ public class Aluno {
         this.aprovado = aprovado;
     }
 
-    public Aluno(String nomeCompleto, String login, String email, String senha) {
-        this.cpf = cpf;
-        this.nomeCompleto = this.nomeCompleto;
-        this.email = this.email;
-        this.celular = celular;
-        this.login = this.login;
-        this.senha = this.senha;
-        this.endereco = endereco;
-        this.cidade = cidade;
-        this.bairro = bairro;
-        this.cep = cep;
-        this.comentario = comentario;
-        this.aprovado = aprovado;
-    }
-
-    public Aluno() {
+    public Aluno(String nomeCompleto, String apelido, String email, String senha) {
 
     }
 
-    // metodos get e set
+    // metodos get e set para IdAluno, NomeCompleto, CPF, Email, Celular, Login, Senha, Endereco,
+    // Cidade, Bairro, Cep, Comentario e aprovado.
+
+
     public int getIdAluno() {
         return idAluno;
     }
 
-    public void setIdAluno(int idAluno) {
-        this.idAluno = idAluno;
+    public void setIdAluno(int ididAluno) {
+        this.idAluno = ididAluno;
     }
 
-    public String getCpf() {
+    public int getCpf() {
         return cpf;
     }
 
-    public void setCpf(String cpf) {
+    public void setCpf(int cpf) {
         this.cpf = cpf;
     }
 
@@ -90,11 +94,11 @@ public class Aluno {
         this.email = email;
     }
 
-    public String getCelular() {
+    public int getCelular() {
         return celular;
     }
 
-    public void setCelular(String celular) {
+    public void setCelular(int celular) {
         this.celular = celular;
     }
 
@@ -138,11 +142,11 @@ public class Aluno {
         this.bairro = bairro;
     }
 
-    public String getCep() {
+    public int getCep() {
         return cep;
     }
 
-    public void setCep(String cep) {
+    public void setCep(int cep) {
         this.cep = cep;
     }
 
@@ -160,24 +164,5 @@ public class Aluno {
 
     public void setAprovado(String aprovado) {
         this.aprovado = aprovado;
-    }
-
-    @Override
-    public String toString() {
-        return "Aluno{" +
-                "idAluno=" + idAluno +
-                ", cpf='" + cpf + '\'' +
-                ", nomeCompleto='" + nomeCompleto + '\'' +
-                ", email='" + email + '\'' +
-                ", celular='" + celular + '\'' +
-                ", login='" + login + '\'' +
-                ", senha='" + senha + '\'' +
-                ", endereco='" + endereco + '\'' +
-                ", cidade='" + cidade + '\'' +
-                ", bairro='" + bairro + '\'' +
-                ", cep='" + cep + '\'' +
-                ", comentario='" + comentario + '\'' +
-                ", aprovado='" + aprovado + '\'' +
-                '}';
     }
 }

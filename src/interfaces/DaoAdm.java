@@ -10,7 +10,7 @@ import java.util.List;
 public interface DaoAdm {
     /**Alunos
      * @return*/
-    List<Aluno> incluiAluno (Aluno id, Aluno cpf, Aluno nome, Aluno email, Aluno celular, Aluno login, Aluno Senha, Aluno Endereco, Aluno Bairro, Aluno Cidade, Aluno Cep, Aluno Aprovado);
+    List<Aluno> incluiAluno (Aluno id, Aluno cpf, Aluno nome, Aluno email, Aluno celular, Aluno login, Aluno Senha, Aluno Endereco, Aluno Bairro, Aluno Cidade, Aluno Cep,Aluno comentario, Aluno Aprovado);
 
     List<Aluno> listaAluno(Aluno id) throws SQLException;
 

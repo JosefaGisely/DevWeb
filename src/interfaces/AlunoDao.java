@@ -102,7 +102,7 @@ public class AlunoDao implements Dao{
     }
 
     @Override
-    public List<Aluno> listaTodos(List u) {
+    public List<Aluno> listaTodos(List aluno) {
         return null;
     }
 

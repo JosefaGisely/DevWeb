@@ -6,6 +6,32 @@
            version="4.0">
 
 
+    <servlet>
+        <servlet-name>MainServlet</servlet-name>
+        <servlet-class>controler.MainServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AlunoServlet</servlet-name>
+        <servlet-class>controler.AlunoServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>PublicoGeralServlet</servlet-name>
+        <servlet-class>controler.PublicoGeralServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>MainServlet</servlet-name>
+        <url-pattern/>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UsuarioServlet</servlet-name>
+        <url-pattern>/UsuarioServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>PublicoGeralServlet</servlet-name>
+        <url-pattern>/PublicoGeralServlet</url-pattern>
+    </servlet-mapping>
+
+
     <filter>
         <filter-name>meuFiltro</filter-name>
         <filter-class>filtro</filter-class>

@@ -3,16 +3,16 @@ package model;
 public class Aluno {
 
     private int idAluno;
-    private int cpf;
+    private String cpf;
     private String nomeCompleto;
     private String email;
-    private int celular;
+    private String celular;
     private String login;
     private String senha;
     private String endereco;
     private String cidade;
     private String bairro;
-    private int cep;
+    private String cep;
     private String comentario;
     private String aprovado;
 
@@ -20,8 +20,8 @@ public class Aluno {
     public Aluno() {}
 
 
-    public Aluno(int cpf, String nomeCompleto, String email, int celular, String login, String senha,
-                 String endereco, String cidade, String bairro, int cep, String comentario, String aprovado){
+    public Aluno(String cpf, String nomeCompleto, String email, String celular, String login, String senha,
+                 String endereco, String cidade, String bairro, String cep, String comentario, String aprovado){
 
         this.cpf = cpf;
         this.nomeCompleto = nomeCompleto;
@@ -37,8 +37,8 @@ public class Aluno {
         this.aprovado = aprovado;
     }
 
-    public Aluno(int idAluno, int cpf, String nomeCompleto, String email, int celular, String login, String senha,
-                 String endereco, String cidade, String bairro, int cep, String comentario, String aprovado) {
+    public Aluno(int idAluno, String cpf, String nomeCompleto, String email, String celular, String login, String senha,
+                 String endereco, String cidade, String bairro, String cep, String comentario, String aprovado) {
         this.idAluno = idAluno;
         this.cpf = cpf;
         this.nomeCompleto = nomeCompleto;
@@ -54,11 +54,15 @@ public class Aluno {
         this.aprovado = aprovado;
     }
 
-    public Aluno(String nomeCompleto, String apelido, String email, String senha) {
-
+    public Aluno(String nomeCompleto, String email, String login, String senha) {
+        this.nomeCompleto = nomeCompleto;
+        this.email = email;
+        this.login = login;
+        this.senha = senha;
     }
 
-    // metodos get e set para IdAluno, NomeCompleto, CPF, Email, Celular, Login, Senha, Endereco,
+
+// metodos get e set para IdAluno, NomeCompleto, CPF, Email, Celular, Login, Senha, Endereco,
     // Cidade, Bairro, Cep, Comentario e aprovado.
 
 
@@ -70,11 +74,11 @@ public class Aluno {
         this.idAluno = ididAluno;
     }
 
-    public int getCpf() {
+    public String getCpf() {
         return cpf;
     }
 
-    public void setCpf(int cpf) {
+    public void setCpf(String cpf) {
         this.cpf = cpf;
     }
 
@@ -94,11 +98,11 @@ public class Aluno {
         this.email = email;
     }
 
-    public int getCelular() {
+    public String getCelular() {
         return celular;
     }
 
-    public void setCelular(int celular) {
+    public void setCelular(String celular) {
         this.celular = celular;
     }
 
@@ -142,11 +146,11 @@ public class Aluno {
         this.bairro = bairro;
     }
 
-    public int getCep() {
+    public String getCep() {
         return cep;
     }
 
-    public void setCep(int cep) {
+    public void setCep(String cep) {
         this.cep = cep;
     }
 

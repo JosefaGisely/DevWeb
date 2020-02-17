@@ -11,10 +11,10 @@ public class AdministradorDao implements DaoAdm {
     FabricaConexoes fabricaConexoes = new FabricaConexoes();
     private Connection connection;
     public AdministradorDao() throws SQLException {
-        fabricaConexoes.getConnection();
+        this.connection = FabricaConexoes.getConnection();
     }
     @Override
-    public List<Aluno> incluiAluno(Aluno id, Aluno cpf, Aluno nome, Aluno email, Aluno celular, Aluno login, Aluno Senha, Aluno Endereço, Aluno Bairro, Aluno Cidade, Aluno Cep, Aluno Comentario, Aluno Aprovado) {
+    public List<Aluno> incluiAluno(Aluno id, Aluno cpf, Aluno nome, Aluno email, Aluno celular, Aluno login, Aluno Senha, Aluno Endereco, Aluno Bairro, Aluno Cidade, Aluno Cep, Aluno Comentario, Aluno Aprovado) {
         // inserir dados em uma tabela de um banco de dados SQL
         String sql =
                 "INSERT INTO usuario "
@@ -24,16 +24,16 @@ public class AdministradorDao implements DaoAdm {
         try {
             // preenche os valores
             PreparedStatement stmt = this.connection.prepareStatement(sql);
-            stmt.setInt(1, cpf.getCpf());
+            stmt.setString(1, cpf.getCpf());
             stmt.setString(2, nome.getNomeCompleto());
             stmt.setString(3, email.getEmail());
-            stmt.setInt(4, celular.getCelular());
+            stmt.setString(4, celular.getCelular());
             stmt.setString(5, login.getLogin());
             stmt.setString(6, Senha.getSenha());
-            stmt.setString(7, Endereço.getEndereco());
+            stmt.setString(7, Endereco.getEndereco());
             stmt.setString(8, Cidade.getCidade());
             stmt.setString(9, Bairro.getBairro());
-            stmt.setInt(10, Cep.getCep());
+            stmt.setString(10, Cep.getCep());
             stmt.setString(11, Comentario.getComentario());
             stmt.setString(12, Aprovado.getAprovado());
 
@@ -65,16 +65,16 @@ public class AdministradorDao implements DaoAdm {
             while (rs.next()) {
                 usuariosList.add(new Aluno(
                         rs.getInt("idUsuario"),
-                        rs.getInt("cpf"),
+                        rs.getString("cpf"),
                         rs.getString("nomeCompleto"),
                         rs.getString("email"),
-                        rs.getInt("celular"),
+                        rs.getString("celular"),
                         rs.getString("login"),
                         rs.getString("senha"),
                         rs.getString("endereco"),
                         rs.getString("cidade"),
                         rs.getString("bairro"),
-                        rs.getInt("cep"),
+                        rs.getString("cep"),
                         rs.getString("comentario"),
                         rs.getString("comentario")));
 
@@ -98,15 +98,15 @@ public class AdministradorDao implements DaoAdm {
         String sql = "UPDATE * FROM ALUNO WWHERE id = value (?)";
         try {PreparedStatement statement = this.connection.prepareStatement(sql);
             statement.setInt(1,id.getIdAluno());
-            statement.setInt(2,cpf.getCpf());
+            statement.setString(2,cpf.getCpf());
             statement.setString(3,nome.getNomeCompleto());
-            statement.setInt(4,celular.getCelular());
+            statement.setString(4,celular.getCelular());
             statement.setString(5,login.getLogin());
             statement.setString(6,Senha.getSenha());
             statement.setString(7,Endereço.getEndereco());
             statement.setString(8,Bairro.getBairro());
             statement.setString(9,Cidade.getCidade());
-            statement.setInt(10,Cep.getCep());
+            statement.setString(10,Cep.getCep());
             statement.execute();
             statement.close();
 

@@ -1,8 +1,8 @@
-<%--
+<<%--
   Created by IntelliJ IDEA.
   User: Gisely Barbosa
-  Date: 15/02/2020
-  Time: 13:14
+  Date: 05/02/2020
+  Time: 14:47
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
@@ -40,7 +40,6 @@
                         <li><a href="instrutores.jsp">INSTRUTORES</a></li>
                         <li class="active"><a href="login.jsp">LOGIN</a></li>
                         <li><a href="registros.jsp">REGISTRO</a></li>
-                        <li><a href="tabelas.jsp">TABELAS</a></li>
                     </ul>
                 </div>
             </div>

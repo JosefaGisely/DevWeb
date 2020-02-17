@@ -1,5 +1,10 @@
-<%-- Created by IntelliJ IDEA. --%>
-
+<%--
+  Created by IntelliJ IDEA.
+  User: Gisely Barbosa
+  Date: 05/02/2020
+  Time: 14:47
+  To change this template use File | Settings | File Templates.
+--%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <!DOCTYPE html>
@@ -41,19 +46,9 @@
             <li><a href="instrutores.jsp">INSTRUTORES</a></li>
             <li><a href="login.jsp">LOGIN</a></li>
             <li><a href="registros.jsp">REGISTRO</a></li>
-            <li><a href="tabela.jsp">TABELAS</a></li>
           </ul>
         </div>
       </div>
-    </div>
-    <div>
-      <h2>Login</h2>
-      <ul>
-        <div class="navicon">
-          <a class="btn btn-outline-light my-2 my-sm-0" href="login.jsp">Entrar</a>
-          <a class="btn btn-outline-light my-2 my-sm-0" href="registros.jsp">Cadastrar</a>
-        </div>
-      </ul>
     </div>
   </nav>
 </div>

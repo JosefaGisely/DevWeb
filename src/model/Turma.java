@@ -2,7 +2,7 @@ package model;
 
 import java.util.Date;
 
-public class Turmas {
+public class Turma {
 
     private int idTurmas;
     private String idInstrutores;
@@ -12,12 +12,12 @@ public class Turmas {
     private Date carga_horaria;
 
     // Construtores
-    public Turmas(){
+    public Turma(){
         super();
 
     }
 
-    public Turmas(int idTurmas, String idInstrutores, String idCursos, Date data_inicial, Date data_final, Date carga_horaria) {
+    public Turma(int idTurmas, String idInstrutores, String idCursos, Date data_inicial, Date data_final, Date carga_horaria) {
         this.idTurmas = idTurmas;
         this.idInstrutores = idInstrutores;
         this.idCursos = idCursos;
@@ -26,7 +26,7 @@ public class Turmas {
         this.carga_horaria = carga_horaria;
     }
 
-    public Turmas(String idInstrutores, String idCursos, Date data_inicial, Date data_final, Date carga_horaria) {
+    public Turma(String idInstrutores, String idCursos, Date data_inicial, Date data_final, Date carga_horaria) {
         this.idInstrutores = idInstrutores;
         this.idCursos = idCursos;
         this.data_inicial = data_inicial;

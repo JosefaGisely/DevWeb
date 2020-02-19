@@ -9,7 +9,7 @@
 
     <filter>
         <filter-name>meuFiltro</filter-name>
-        <filter-class>filtro</filter-class>
+        <filter-class>filtro.AlunoFiltro</filter-class>
     </filter>
 
     <filter-mapping>

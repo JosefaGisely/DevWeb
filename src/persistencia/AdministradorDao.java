@@ -1,6 +1,7 @@
-package interfaces;
+package persistencia;
 
 import connection.FabricaConexoes;
+import interfaces.DaoAdm;
 import model.*;
 
 import java.sql.*;
@@ -94,7 +95,7 @@ public class AdministradorDao implements DaoAdm {
     }
 
     @Override
-    public void alteraAlunos(Aluno id, Aluno cpf, Aluno nome, Aluno email, Aluno celular, Aluno login, Aluno Senha, Aluno Endereço, Aluno Bairro, Aluno Cidade, Aluno Cep) {
+    public void alteraAlunos(Aluno id, Aluno cpf, Aluno nome, Aluno email, Aluno celular, Aluno login, Aluno Senha, Aluno Endereco, Aluno Bairro, Aluno Cidade, Aluno Cep) {
         String sql = "UPDATE * FROM ALUNO WWHERE id = value (?)";
         try {PreparedStatement statement = this.connection.prepareStatement(sql);
             statement.setInt(1,id.getIdAluno());
@@ -103,7 +104,7 @@ public class AdministradorDao implements DaoAdm {
             statement.setString(4,celular.getCelular());
             statement.setString(5,login.getLogin());
             statement.setString(6,Senha.getSenha());
-            statement.setString(7,Endereço.getEndereco());
+            statement.setString(7,Endereco.getEndereco());
             statement.setString(8,Bairro.getBairro());
             statement.setString(9,Cidade.getCidade());
             statement.setString(10,Cep.getCep());
@@ -340,7 +341,7 @@ public class AdministradorDao implements DaoAdm {
     }
 
     @Override
-    public void incluiTurma(Turmas id, Turmas instrutorId, Turmas cursoId, Turmas dataInicio, Turmas dataFinal, Turmas cargaHoraria) {
+    public void incluiTurma(Turma id, Turma instrutorId, Turma cursoId, Turma dataInicio, Turma dataFinal, Turma cargaHoraria) {
         try {
 
             PreparedStatement stmt = this.connection.prepareStatement("INSERT INTO Turmas "
@@ -364,10 +365,10 @@ public class AdministradorDao implements DaoAdm {
 
 
     @Override
-    public List<Turmas> listaTurma(Turmas id) {
+    public List<Turma> listaTurma(Turma id) {
         try {
             // Cria uma lista de usuários
-            List<Turmas> turmasArrayList = new ArrayList<>();
+            List<Turma> turmasArrayList = new ArrayList<>();
             // Cria o statment que contém a Query de consulta
             PreparedStatement stmt = this.connection.prepareStatement("SELECT * FROM Turmas");
             // Cria uma varíavel para receber o resultado da Query
@@ -375,7 +376,7 @@ public class AdministradorDao implements DaoAdm {
 
             // laço de repetição para percorrer todas as intâncias do ResultSet
             while (rs.next()) {
-                turmasArrayList.add(new Turmas(
+                turmasArrayList.add(new Turma(
                         rs.getInt("idTurmas"),
                         rs.getString("idInstrutores"),
                         rs.getString("idCursos"),
@@ -397,7 +398,7 @@ public class AdministradorDao implements DaoAdm {
     }
 
     @Override
-    public void alteraTurma(Turmas id, Turmas instrutorId, Turmas cursoId, Turmas dataInicio, Turmas dataFinal, Turmas cargaHoraria) {
+    public void alteraTurma(Turma id, Turma instrutorId, Turma cursoId, Turma dataInicio, Turma dataFinal, Turma cargaHoraria) {
         String sql = "UPDATE * FROM Turmas WWHERE id = value (?)";
         try {PreparedStatement statement = this.connection.prepareStatement(sql);
             statement.setInt(1,id.getIdTurmas());
@@ -415,7 +416,7 @@ public class AdministradorDao implements DaoAdm {
     }
 
     @Override
-    public void excluiTurma(Turmas id) {
+    public void excluiTurma(Turma id) {
         String sql = "DELETE * from Turmas WHERE id = value (?)";
         try {PreparedStatement statement = this.connection.prepareStatement(sql);
             statement.setInt(1,id.getIdTurmas());
@@ -427,7 +428,7 @@ public class AdministradorDao implements DaoAdm {
     }
 
     @Override
-    public void excluitTodasTurmas(Turmas turmas) {
+    public void excluitTodasTurmas(Turma turmas) {
         String sql = "DELETE * FROM Turmas";
         try {PreparedStatement statement = this.connection.prepareStatement(sql);
             statement.execute();
@@ -438,11 +439,11 @@ public class AdministradorDao implements DaoAdm {
     }
 
     @Override
-    public void listarPorAlunosTodasOsCursoTurmasENota(Cursos idCurso, Turmas idTurma, Aluno idAluno){
+    public void listarPorAlunosTodasOsCursoTurmasENota(Cursos idCurso, Turma idTurma, Aluno idAluno){
     }
 
     @Override
-    public void listarPorInstrutorTodosOsCursosTurmasValorTotal(Instrutor idInstrutor, Turmas idTurma, Cursos IdCursos) {
+    public void listarPorInstrutorTodosOsCursosTurmasValorTotal(Instrutor idInstrutor, Turma idTurma, Cursos IdCursos) {
 
     }
 }

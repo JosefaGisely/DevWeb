@@ -1,6 +1,7 @@
-package interfaces;
+package persistencia;
 
 import connection.FabricaConexoes;
+import interfaces.Dao;
 import model.Aluno;
 
 import java.sql.Connection;
@@ -12,7 +13,7 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class AlunoDao implements Dao{
+public class AlunoDao implements Dao {
 
     private Connection connection;
 

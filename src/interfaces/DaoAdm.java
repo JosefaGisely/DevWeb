@@ -3,7 +3,7 @@ package interfaces;
 import model.Aluno;
 import model.Cursos;
 import model.Instrutor;
-import model.Turmas;
+import model.Turma;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -41,21 +41,21 @@ public interface DaoAdm {
 
     void excluiTodosCursos(Cursos cursos);
     /**Turmas**/
-    void incluiTurma(Turmas id, Turmas instrutorId, Turmas cursoId, Turmas dataInicio, Turmas dataFinal, Turmas cargaHoraria);
+    void incluiTurma(Turma id, Turma instrutorId, Turma cursoId, Turma dataInicio, Turma dataFinal, Turma cargaHoraria);
 
-    List<Turmas> listaTurma(Turmas id);
+    List<Turma> listaTurma(Turma id);
 
-    void alteraTurma(Turmas id, Turmas instrutorId, Turmas cursoId, Turmas dataInicio, Turmas dataFinal, Turmas cargaHoraria);
+    void alteraTurma(Turma id, Turma instrutorId, Turma cursoId, Turma dataInicio, Turma dataFinal, Turma cargaHoraria);
 
-    void excluiTurma(Turmas id);
+    void excluiTurma(Turma id);
 
-    void excluitTodasTurmas(Turmas turmas);
+    void excluitTodasTurmas(Turma turmas);
 
     /*Listar Tudo RF16,RF17**/
 
-    void listarPorAlunosTodasOsCursoTurmasENota(Cursos idCurso, Turmas idTurma,Aluno idAluno);
+    void listarPorAlunosTodasOsCursoTurmasENota(Cursos idCurso, Turma idTurma, Aluno idAluno);
 
-    void listarPorInstrutorTodosOsCursosTurmasValorTotal(Instrutor idInstrutor, Turmas idTurma, Cursos IdCursos);
+    void listarPorInstrutorTodosOsCursosTurmasValorTotal(Instrutor idInstrutor, Turma idTurma, Cursos IdCursos);
 
 
 }

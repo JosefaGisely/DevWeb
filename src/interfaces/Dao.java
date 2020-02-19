@@ -22,7 +22,7 @@ public interface Dao {
 
     void remove(int id);
 
-    void removePorAutor(int idUsuario);
+    void removePorAutor(int idAluno);
 
 
 

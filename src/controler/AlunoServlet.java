@@ -3,6 +3,7 @@ package controler;
 import interfaces.AlunoDao;
 import model.Aluno;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -13,6 +14,7 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -20,6 +22,117 @@ import java.util.logging.Logger;
 @WebServlet(name = "AlunoServlet", urlPatterns = {"/Registros"})
 public class AlunoServlet extends HttpServlet {
 
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        AlunoDao alunodao = new AlunoDao();
+        Aluno aluno = new Aluno();
+        aluno.setNomeCompleto(request.getParameter("nome"));
+        aluno.setLogin(request.getParameter("login"));
+        aluno.setCpf(request.getParameter("cpf"));
+        aluno.setSenha(request.getParameter("senha"));
+
+        if (aluno.inserir(aluno)) {
+            RequestDispatcher dispatcher = request.getRequestDispatcher("aluno.jsp");
+            Aluno a = alunodao.buscar(request.getParameter("cpf"));
+            request.setAttribute("aluno", a);
+            dispatcher.forward(request, response);
+        }else{
+            response.sendRedirect("erro_cadastro.jsp");
+        }
+
+    }
+
+}
+
+
+
+
+
+    }
+
+
+    /*
+
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        try {
+
+            AlunoDao dao = new AlunoDao();
+
+            if (request.getParameter("acao").equals("mostrar")) {
+                ArrayList<Aluno> meusAlunos = dao.getLista();
+                RequestDispatcher disp = getServletContext().getRequestDispatcher("/ListaContatoView.jsp");
+                request.setAttribute("meusAlunos", meusAlunos);
+                disp.forward(request, response);
+
+            } else {
+
+                int id = Integer.parseInt(request.getParameter("id"));
+
+                if (request.getParameter("acao").equals("alterar")) {
+                    Aluno aluno = dao.getContatoPorID(id);
+                    if (aluno.getId() > 0) {
+
+                        request.setAttribute("id",aluno.getId());
+                        request.setAttribute("nome",aluno.getNome());
+                        request.setAttribute("idade",aluno.getIdade());
+
+                        RequestDispatcher rs = request.getRequestDispatcher("Form_Contato_Alterar.jsp");
+                        rs.forward(request, response);
+                    } else {
+                        PrintWriter out = response.getWriter();
+                        out.println("<script>alert('Usuário não encontrado!');location.href='ContatoController?acao=mostrar'</script>");
+                    }
+                } else {
+
+                    if (request.getParameter("acao").equals("excluir")) {
+                        PrintWriter out = response.getWriter();
+                        if (dao.excluir(id)) {
+                            out.println("<script>alert('Usuário excluído com sucesso!');location.href='ContatoController?acao=mostrar'</script>");
+                        } else {
+                            out.println("<script>alert('Não foi possível excluir!');location.href='ContatoController?acao=mostrar'</script>");
+                        }
+                    }
+                }
+            }
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            System.out.println("Erro ao recuperar dados no Get do controler");
+        }
+    }
+
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        request.setCharacterEncoding("UTF-8");
+        String mensagem;
+        try {
+            Contato contato = new Contato();
+
+            if (!request.getParameter("id").isEmpty()) {
+                contato.setId(Integer.parseInt(request.getParameter("id")));
+            }
+
+            contato.setNome(request.getParameter("nome"));
+            contato.setIdade(Integer.parseInt(request.getParameter("idade")));
+
+            ContatoDAO dao = new ContatoDAO();
+
+            if (dao.gravar(contato)) {
+                mensagem = "Usuário gravado com sucesso!";
+            } else {
+                mensagem = "Erro ao gravar usuário!";
+            }
+        } catch (Exception e) {
+            mensagem = "Erro ao gravar usuário!";
+            System.out.println("Erro ao gravar usuário: " + e.getMessage());
+        }
+
+        PrintWriter out = response.getWriter();
+        out.println("<script>alert('" + mensagem + "');location.href='ContatoController?acao=mostrar'</script>");
+    }
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, ParseException, SQLException {
         response.setContentType("text/html;charset=UTF-8");
@@ -58,7 +171,7 @@ public class AlunoServlet extends HttpServlet {
             throws ServletException, IOException, SQLException {
         // Cria um novo usuário com os dados dos Form
         Aluno usuario = new Aluno(request.getParameter("nomeCompleto"),
-                request.getParameter("apelido"),
+                request.getParameter("login"),
                 request.getParameter("email"),
                 request.getParameter("senha"));
 
@@ -68,21 +181,17 @@ public class AlunoServlet extends HttpServlet {
         usuarioDao.inclui(usuario);
 
         request.getSession().setAttribute("usuarioLogado", usuario);
-        getServletConfig().getServletContext().getRequestDispatcher("/feed.jsp").forward(request, response);
+        getServletConfig().getServletContext().getRequestDispatcher("/index.jsp").forward(request, response);
     }
 
     private void atualizaUsuario(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, ParseException, SQLException {
         if (request.getSession().getAttribute("usuarioLogado") == null){
-            response.sendRedirect("home.jsp");
+            response.sendRedirect("index.jsp");
             return;
         } else{
 
             AlunoDao usuarioDAO = new AlunoDao();
-
-
-            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-            Date date = dateFormat.parse(request.getParameter("dataNascimento"));
 
             Aluno aluno = new Aluno(
                     request.getParameter("nomeCompleto"),
@@ -95,7 +204,7 @@ public class AlunoServlet extends HttpServlet {
             usuarioDAO.altera(aluno);
 
             request.getSession().setAttribute("usuarioLogado", aluno);
-            response.sendRedirect("feed.jsp");
+            response.sendRedirect("index.jsp");
         }
     }
 
@@ -110,7 +219,7 @@ public class AlunoServlet extends HttpServlet {
         // Chama método para cadastrar usuário
         alunoDao.alteraSenha(aluno);
 
-        response.sendRedirect("home.jsp");
+        response.sendRedirect("index.jsp");
     }
 
     private void fazLogin(HttpServletRequest request, HttpServletResponse response)
@@ -125,7 +234,7 @@ public class AlunoServlet extends HttpServlet {
             // Salva na session
             httpSession.setAttribute("usuarioLogado", usuario);
             // Redireciona
-            getServletConfig().getServletContext().getRequestDispatcher("/PublicacaoServlet?operacao=4").forward(request, response);
+            getServletConfig().getServletContext().getRequestDispatcher("/operacao=4").forward(request, response);
         } else{
             response.sendRedirect("home.jsp");
         }
@@ -134,18 +243,18 @@ public class AlunoServlet extends HttpServlet {
     private void fazLogout(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException{
         request.getSession().invalidate();
-        response.sendRedirect("home.jsp");
+        response.sendRedirect("index.jsp");
     }
 
     private void trocaTela(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException{
         if (request.getSession().getAttribute("usuarioLogado") == null){
-            response.sendRedirect("home.jsp");
+            response.sendRedirect("index.jsp");
             return;
         } else{
-            response.sendRedirect("conta.jsp");
+            response.sendRedirect("login.jsp");
         }
-    }
+    }/*
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
@@ -155,7 +264,7 @@ public class AlunoServlet extends HttpServlet {
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
-     */
+     *//*
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -164,8 +273,7 @@ public class AlunoServlet extends HttpServlet {
         } catch (ParseException | SQLException ex) {
             Logger.getLogger(AlunoServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }
-
+    }/*
     /**
      * Handles the HTTP <code>POST</code> method.
      *
@@ -174,7 +282,7 @@ public class AlunoServlet extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    @Override
+   /* @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         try {
@@ -183,13 +291,13 @@ public class AlunoServlet extends HttpServlet {
             Logger.getLogger(AlunoServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-
+/*
     /**
      * Returns a short description of the servlet.
      *
      * @return a String containing servlet description
      */
-    @Override
+    /*@Override
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>

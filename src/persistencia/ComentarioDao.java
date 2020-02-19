@@ -1,7 +1,8 @@
-package interfaces;
+package persistencia;
 
 import connection.FabricaConexoes;
 import model.Comentario;
+import persistencia.AlunoDao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

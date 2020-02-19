@@ -20,23 +20,6 @@ public class Aluno {
     public Aluno() {}
 
 
-    public Aluno(String cpf, String nomeCompleto, String email, String celular, String login, String senha,
-                 String endereco, String cidade, String bairro, String cep, String comentario, String aprovado){
-
-        this.cpf = cpf;
-        this.nomeCompleto = nomeCompleto;
-        this.email = email;
-        this.celular = celular;
-        this.login = login;
-        this.senha = senha;
-        this.endereco = endereco;
-        this.cidade = cidade;
-        this.bairro = bairro;
-        this.cep = cep;
-        this.comentario = comentario;
-        this.aprovado = aprovado;
-    }
-
     public Aluno(int idAluno, String cpf, String nomeCompleto, String email, String celular, String login, String senha,
                  String endereco, String cidade, String bairro, String cep, String comentario, String aprovado) {
         this.idAluno = idAluno;
@@ -54,13 +37,6 @@ public class Aluno {
         this.aprovado = aprovado;
     }
 
-    public Aluno(String nomeCompleto, String email, String login, String senha) {
-        this.nomeCompleto = nomeCompleto;
-        this.email = email;
-        this.login = login;
-        this.senha = senha;
-    }
-
 
 // metodos get e set para IdAluno, NomeCompleto, CPF, Email, Celular, Login, Senha, Endereco,
     // Cidade, Bairro, Cep, Comentario e aprovado.
@@ -70,8 +46,8 @@ public class Aluno {
         return idAluno;
     }
 
-    public void setIdAluno(int ididAluno) {
-        this.idAluno = ididAluno;
+    public void setIdAluno(int idAluno) {
+        this.idAluno = idAluno;
     }
 
     public String getCpf() {

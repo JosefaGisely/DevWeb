@@ -1,6 +1,6 @@
 package persistencia;
 
-import connection.FabricaConexoes;
+import conexao.FabricaConexoes;
 import interfaces.DaoAdm;
 import model.*;
 

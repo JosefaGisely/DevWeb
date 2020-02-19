@@ -19,7 +19,7 @@ import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-@WebServlet(name = "AlunoServlet", urlPatterns = {"/Registros"})
+@WebServlet(name = "AlunoServlet", urlPatterns = {"/AlunoServlet"})
 public class AlunoServlet extends HttpServlet {
 
     @Override

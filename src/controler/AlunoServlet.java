@@ -1,24 +1,15 @@
 package controler;
 
-import persistencia.AlunoDao;
 import model.Aluno;
+import persistencia.AlunoDao;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.SQLException;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 @WebServlet(name = "AlunoServlet", urlPatterns = {"/AlunoServlet"})
 public class AlunoServlet extends HttpServlet {
@@ -61,7 +52,7 @@ public class AlunoServlet extends HttpServlet {
         }
 
         PrintWriter out = response.getWriter();
-        out.println("<script>alert('" + mensagem + "');location.href='ContatoController?acao=mostrar'</script>");
+        out.println("<script>alert('" + mensagem + "');location.href='alunoServlet?acao=mostrar'</script>");
 
     }
 

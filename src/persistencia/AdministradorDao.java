@@ -12,7 +12,7 @@ public class AdministradorDao implements DaoAdm {
     FabricaConexoes fabricaConexoes = new FabricaConexoes();
     private Connection connection;
     public AdministradorDao() throws SQLException {
-        this.connection = FabricaConexoes.getConnection();
+
     }
     @Override
     public List<Aluno> incluiAluno(Aluno id, Aluno cpf, Aluno nome, Aluno email, Aluno celular, Aluno login, Aluno Senha, Aluno Endereco, Aluno Bairro, Aluno Cidade, Aluno Cep, Aluno Comentario, Aluno Aprovado) {

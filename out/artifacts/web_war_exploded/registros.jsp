@@ -7,6 +7,7 @@
 --%>
 
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page import="java.util.*,controler.*,model.*" %>
 
 <!DOCTYPE html>
 <html>
@@ -57,7 +58,7 @@
         <h1>REGISTRE-SE</h1>
         <p>Digite seus dados para se registrar no Cursos Lero Lero</p>
         <br>
-        <form name="formcontato" method="post">
+        <form name="formcontato" method="post" action="${pageContext.request.contextPath}/AlunoServlet">
             <div class="pt1">
                 <p>Nome completo:</p>
                 <input id="nomeCompleto" name="nomeCompleto" type="text" required>

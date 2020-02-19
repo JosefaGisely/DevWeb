@@ -28,7 +28,7 @@ public class AlunoDao{
                 sql = "INSERT INTO aluno (cpf, nomeCompleto, email, celular, login, senha, endereco, cidade, bairro, cep, comentario, aprovado) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
             } else {
                 // Realizar uma alteração
-                sql = "UPDATE contato SET cpf=?, nomeCompleto = ? , email = ?, celular = ?, login = ?, senha = ?, endereco = ?, cidade = ?, bairro = ? , cep = ?, WHERE id=?";
+                sql = "UPDATE aluno SET cpf=?, nomeCompleto = ? , email = ?, celular = ?, login = ?, senha = ?, endereco = ?, cidade = ?, bairro = ? , cep = ?, WHERE id=?";
 
             }
 

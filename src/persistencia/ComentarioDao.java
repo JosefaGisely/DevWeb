@@ -14,7 +14,7 @@ public class ComentarioDao {
 
 
     public ComentarioDao() throws SQLException {
-        this.connection = FabricaConexoes.getConnection();
+
     }
 
 

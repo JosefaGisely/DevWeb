@@ -8,15 +8,24 @@
 
 
     <filter>
-        <filter-name>meuFiltro</filter-name>
-        <filter-class>filtro.AlunoFiltro</filter-class>
+        <filter-name>FiltroLogin</filter-name>
+        <filter-class>filtro.LoginFiltro</filter-class>
     </filter>
-
+    <filter>
+        <filter-name>FiltroAdmin</filter-name>
+        <filter-class>filtro.AdministradorFiltro</filter-class>
+    </filter>
     <filter-mapping>
-        <filter-name>meuFiltro</filter-name>
-        <url-pattern>/*</url-pattern>
+        <filter-name>FiltroAdmin</filter-name>
+        <url-pattern>/acesso-restrito/admin/*</url-pattern>
     </filter-mapping>
-
+    <filter-mapping>
+        <filter-name>FiltroLogin</filter-name>
+        <url-pattern>/AdministradorController</url-pattern>
+        <url-pattern>/AlunosController</url-pattern>
+        <url-pattern>/InstrutoresController</url-pattern>
+        <url-pattern>/LoginController</url-pattern>
+    </filter-mapping>
     <session-config>
         <session-timeout>
             30

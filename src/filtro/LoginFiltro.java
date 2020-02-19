@@ -1,25 +1,31 @@
 package filtro;
 
-import javax.servlet.*;
 import java.io.IOException;
 import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-import java.util.logging.Filter;
-import java.util.logging.LogRecord;
+import javax.servlet.Filter;
+import javax.servlet.FilterChain;
+import javax.servlet.FilterConfig;
+import javax.servlet.ServletException;
+import javax.servlet.ServletRequest;
+import javax.servlet.ServletResponse;
 
 public class LoginFiltro implements Filter {
     public LoginFiltro() {
     }
 
+    public void init(FilterConfig filterConfig) {
+    }
+
 
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
         try {
-            if (request.getParameterMap().containsKey("password")) {
-                if (request.getParameter("password") != null) {
-                    String senha = request.getParameter("password");
+            if (request.getParameterMap().containsKey("senha")) {
+                if (request.getParameter("senha") != null) {
+                    String senha = request.getParameter("senha");
                     String senhaMD5 = getMd5(senha);
-                    request.setAttribute("password", senhaMD5);
+                    request.setAttribute("senha", senhaMD5);
                 }
             }
             chain.doFilter(request, response);
@@ -27,7 +33,6 @@ public class LoginFiltro implements Filter {
             ex.printStackTrace();
             System.err.println("Erro no filtro de login ao encriptar senha: " + ex);
         }
-        return;
     }
 
     public String getMd5(String senha) {
@@ -47,15 +52,8 @@ public class LoginFiltro implements Filter {
         }
     }
 
-    public void init(FilterConfig filterConfig) {
-    }
-
 
     public void destroy() {
     }
 
-    @Override
-    public boolean isLoggable(LogRecord logRecord) {
-        return false;
-    }
 }

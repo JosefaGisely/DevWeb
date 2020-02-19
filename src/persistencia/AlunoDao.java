@@ -1,298 +1,147 @@
 package persistencia;
 
 import conexao.FabricaConexoes;
-import interfaces.Dao;
 import model.Aluno;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
-import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
-public class AlunoDao implements Dao {
+public class AlunoDao{
 
-    private Connection connection;
-
-    public AlunoDao() throws SQLException {
-        this.connection = FabricaConexoes.getConnection();
-    }
-
-
-    public void inclui(Aluno aluno) {
-    // inserir dados em uma tabela de um banco de dados SQL
-    String sql =
-        "INSERT INTO escola.aluno "
-            + "(cpf, nomeCompleto, email, celular, login, senha, endereco, cidade, bairro, cep, comentario, aprovado) "
-            + "values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-
-    // preenche os valores
-    try {
-        PreparedStatement stmt = FabricaConexoes.getConnection().prepareStatement(sql);
-        stmt.setString(1, aluno.getCpf());
-        stmt.setString(2, aluno.getNomeCompleto());
-        stmt.setString(3, aluno.getEmail());
-        stmt.setString(4, aluno.getCelular());
-        stmt.setString(5, aluno.getLogin());
-        stmt.setString(6, aluno.getSenha());
-        stmt.setString(7, aluno.getEndereco());
-        stmt.setString(8, aluno.getCidade());
-        stmt.setString(9, aluno.getBairro());
-        stmt.setString(10, aluno.getCep());
-        stmt.setString(11, aluno.getComentario());
-        stmt.setString(12, aluno.getAprovado());
-
-        // Executa o Statment
-        stmt.execute();
-        // Encerra o Statment
-        stmt.close();
-        // Fecha conexão BD
-        connection.close();
-    }catch (SQLException e) {
-        throw new RuntimeException(e);
-        }
-    }
-
-    public List<Aluno> listaTodos(Aluno aluno) throws SQLException {
-    try {
-        // Cria uma lista de usuários
-        List<Aluno> usuariosList = new ArrayList<>();
-        // Cria o statment que contém a Query de consulta
-        PreparedStatement stmt = this.connection.prepareStatement("SELECT * FROM usuario");
-
-        // Cria uma varíavel para receber o resultado da Query
-        ResultSet rs = stmt.executeQuery();
-
-        // laço de repetição para percorrer todas as intâncias do ResultSet
-        while (rs.next()) {
-                usuariosList.add(
-                new Aluno(
-                rs.getInt("idUsuario"),
-                rs.getString("cpf"),
-                rs.getString("nomeCompleto"),
-                rs.getString("email"),
-                rs.getString("celular"),
-                rs.getString("login"),
-                rs.getString("senha"),
-                rs.getString("endereco"),
-                rs.getString("cidade"),
-                rs.getString("bairro"),
-                rs.getString("cep"),
-                rs.getString("comentario"),
-                rs.getString("aprovado")));
-        }
-        // Encerra o ResultSet
-        rs.close();
-        // Encerra o Statment
-        stmt.close();
-        // Fecha conexão BD
-        connection.close();
-        // Retorna a lista de Usuários do BD
-        return usuariosList;
-        }catch (SQLException e) {
-        throw new RuntimeException(e);
-        }
-    }
-
-    @Override
-    public void adiciona(Aluno aluno) {
-
-    }
-
-    @Override
-    public List<Aluno> listaTodos(List aluno) {
-        return null;
-    }
-
-    @Override
-    public Aluno busca(Aluno id) {
-    try {
-        // Cria o statment que contém a Query de consulta
-        PreparedStatement stmt =
-            this.connection.prepareStatement("SELECT * FROM usuario WHERE idUsuario = ?");
-        stmt.setInt(1, Integer.parseInt(String.valueOf(id)));
-        // Cria uma varíavel para receber o resultado da Query
-        ResultSet rs = stmt.executeQuery();
-
-        // Cria usuário encontrado
-        Aluno usuario = null;
-        // Verifica se houve algum retorno
-        if (rs.next()) {
-            usuario = new Aluno(
-                rs.getInt("idUsuario"),
-                rs.getString("cpf"),
-                rs.getString("nomeCompleto"),
-                rs.getString("email"),
-                rs.getString("celular"),
-                rs.getString("login"),
-                rs.getString("senha"),
-                rs.getString("endereco"),
-                rs.getString("cidade"),
-                rs.getString("bairro"),
-                rs.getString("cep"),
-                rs.getString("comentario"),
-                rs.getString("aprovado"));
-        }
-        // Encerra o ResultSet
-        rs.close();
-        // Encerra o Statment
-        stmt.close();
-        // Fecha conexão BD
-        connection.close();
-        // Retorna a lista de Usuários do BD
-        return usuario;
-        } catch (SQLException e) {
-        throw new RuntimeException(e);
-        }
-    }
-
-    @Override
-    public Aluno buscaPorEmail(String email) {
-        return null;
-    }
-
-    public Aluno buscaLogin(String email, String senha) {
-    try {
-        // Cria o statment que contém a Query de consulta
-        PreparedStatement stmt =
-            this.connection.prepareStatement(
-                    "SELECT * FROM usuario WHERE " + "	email = ? and " + "senha = ?");
-        stmt.setString(1, email);
-        stmt.setString(2, senha);
-        // Cria uma varíavel para receber o resultado da Query
-        ResultSet rs = stmt.executeQuery();
-
-        // Cria usuário encontrado
-        Aluno usuario = null;
-        // Verifica se houve algum retorno
-        if (rs.next()) {
-        usuario =
-            new Aluno(
-                rs.getInt("idUsuario"),
-                rs.getString("cpf"),
-                rs.getString("nomeCompleto"),
-                rs.getString("email"),
-                rs.getString("celular"),
-                rs.getString("login"),
-                rs.getString("senha"),
-                rs.getString("endereco"),
-                rs.getString("cidade"),
-                rs.getString("bairro"),
-                rs.getString("cep"),
-                rs.getString("comentario"),
-                rs.getString("aprovado"));
-        }
-        // Encerra o ResultSet
-        rs.close();
-          // Encerra o Statment
-        stmt.close();
-        // Fecha conexão BD
-        connection.close();
-        // Retorna a lista de Usuários do BD
-        return usuario;
-    } catch (SQLException e) {
-        throw new RuntimeException(e);
-        }
-    }
-
-    @Override
-    public void altera(Aluno aluno) {
-    try {
-        PreparedStatement stmt =
-            this.connection.prepareStatement(
-                "UPDATE usuario "
-                    + "set cpf = ?,"
-                    + "nomeCompleto = ?, "
-                    + "email = ?, "
-                    + "celular = ?, "
-                    + "login = ?, "
-                    + "senha = ? "
-                    + "endereco = ?, "
-                    + "cidade = ?, "
-                    + "bairro = ?, "
-                    + "cep = ? "
-                    + "comentario = ?, "
-                    + "aprovado = ? "
-                    + "WHERE idUsuario = ?");
-
-        stmt.setString(1, aluno.getCpf());
-        stmt.setString(2, aluno.getNomeCompleto());
-        stmt.setString(3, aluno.getEmail());
-        stmt.setString(4, aluno.getCelular());
-        stmt.setString(5, aluno.getLogin());
-        stmt.setString(6, aluno.getSenha());
-        stmt.setString(7, aluno.getEndereco());
-        stmt.setString(8, aluno.getCidade());
-        stmt.setString(9, aluno.getBairro());
-        stmt.setString(10, aluno.getCep());
-        stmt.setString(11, String.valueOf(aluno.getIdAluno()));
-        System.out.println(stmt.toString());
-        // Executa o Statment
-        stmt.execute();
-        // Encerra o Statment
-        stmt.close();
-        // Fecha conexão BD
-        connection.close();
-        } catch (SQLException ex) {
-            Logger.getLogger(AlunoDao.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
-
-
-    public void alteraSenha(Aluno aluno) {
-    try {
-        PreparedStatement stmt =
-            this.connection.prepareStatement(
-                "UPDATE usuario SET " + "senha = ? " + "WHERE idUsuario = ?");
-        stmt.setString(1, aluno.getSenha());
-        stmt.setInt(2, (aluno.getIdAluno()));
-        System.out.println(stmt.toString());
-        // Executa o Statment
-        stmt.execute();
-        // Encerra o Statment
-        stmt.close();
-        // Fecha conexão BD
-        connection.close();
-    }catch (SQLException ex) {
-        Logger.getLogger(AlunoDao.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
-
-    public void remove(int id) {
-    try {
-        (new ComentarioDao()).removePorAutor(id);
-        PreparedStatement stmt =
-            this.connection.prepareStatement("DELETE FROM usuario WHERE idUsuario = ?");
-        stmt.setInt(1, id);
-        // Executa o Statment
-        stmt.execute();
-        // Encerra o Statment
-        stmt.close();
-        // Fecha conexão BD
-        connection.close();
-    } catch (SQLException ex) {
-        Logger.getLogger(AlunoDao.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
-
-    @Override
-    public void removePorAutor(int idUsuario) {
+    private Connection conexao;
+    public AlunoDao() {
         try {
-            PreparedStatement stmt = this.connection.prepareStatement("DELETE FROM comentario WHERE autor = ?");
-            stmt.setInt(1, idUsuario);
-            stmt.execute();
-            stmt.close();
-
-            connection.close();
-        } catch (SQLException ex) {
-            Logger.getLogger(AlunoDao.class.getName()).log(Level.SEVERE, null, ex);
+            // Executa a conexão com o banco de dados
+            conexao = FabricaConexoes.criaConexao();
+        }
+        catch( Exception e ) {
+            System.out.println("Erro criação de conexao DAO");
+            System.out.println(e);
         }
     }
 
-   //  Aluno validar(String login, String senha) {
+    public boolean gravar( Aluno aluno ) {
+        try {
+            String sql;
+            if ( aluno.getIdAluno() == 0 ) {
+                // Realizar uma inclusão
+                sql = "INSERT INTO aluno (cpf, nomeCompleto, email, celular, login, senha, endereco, cidade, bairro, cep, comentario, aprovado) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+            } else {
+                // Realizar uma alteração
+                sql = "UPDATE contato SET cpf=?, nomeCompleto = ? , email = ?, celular = ?, login = ?, senha = ?, endereco = ?, cidade = ?, bairro = ? , cep = ?, WHERE id=?";
 
-    //}
+            }
+
+            PreparedStatement stmt = conexao.prepareStatement(sql);
+            stmt.setString(1, aluno.getCpf());
+            stmt.setString(2, aluno.getNomeCompleto());
+            stmt.setString(3, aluno.getEmail());
+            stmt.setString(4, aluno.getCelular());
+            stmt.setString(5, aluno.getLogin());
+            stmt.setString(6, aluno.getSenha());
+            stmt.setString(7, aluno.getEndereco());
+            stmt.setString(8, aluno.getCidade());
+            stmt.setString(9, aluno.getBairro());
+            stmt.setString(10, aluno.getCep());
+            stmt.setString(11, aluno.getAprovado());
+            stmt.setString(11, String.valueOf(aluno.getIdAluno()));
+            System.out.println(stmt.toString());
+
+            if ( aluno.getIdAluno()> 0 )
+                stmt.setInt(3, aluno.getIdAluno());
+
+            stmt.execute();
+
+            return true;
+        } catch( SQLException e ) {
+            System.out.println("Erro de SQL: " + e.getMessage());
+            return false;
+        }
+    }
+
+    public boolean excluir( int id ) {
+        try {
+            String sql = "DELETE FROM contato WHERE id = ?";
+            PreparedStatement ps = conexao.prepareStatement(sql);
+            ps.setInt(1, id);
+            ps.execute();
+            return true;
+        } catch( SQLException e ) {
+            System.out.println("Erro de SQL: " + e.getMessage());
+            return false;
+        }
+    }
+
+    public ArrayList<Aluno> getLista() {
+        //Cria o objeto resultado que irá armazenar os registros retornados do BD
+        ArrayList<Aluno> resultado = new ArrayList<>();
+        try {
+            // Cria o objeto para quer será utilizado para enviar comandos SQL
+            // para o BD
+            Statement stmt = conexao.createStatement();
+            // Armazena o resultado do comando enviado para o banco de dados
+            ResultSet rs = stmt.executeQuery("select * from contato");
+            // rs.next() Aponta para o próximo registro do BD, se houver um
+            while( rs.next() ) {
+                //Cria o objeto da classe Contato para armazenar os dados
+                //que vieram do BD
+                Aluno aluno = new Aluno();
+
+                //Pega o conteúdo da coluna do ResultSet (rs)
+                aluno.setIdAluno(rs.getInt("id"));
+                aluno.setCpf(rs.getString("cpf"));
+                aluno.setNomeCompleto( rs.getString("nome"));
+                aluno.setEmail(rs.getString("email"));
+                aluno.setCelular(rs.getString("celular"));
+                aluno.setLogin(rs.getString("login"));
+                aluno.setSenha(rs.getString("senha"));
+                aluno.setEndereco(rs.getString("endereco"));
+                aluno.setCidade(rs.getString("cidade"));
+                aluno.setBairro(rs.getString("bairro"));
+                aluno.setCep(rs.getString("cep"));
+
+                //Adiciona o objeto criado na ArrayList resultado
+                resultado.add(aluno);
+            }
+        } catch( SQLException e ) {
+            System.out.println("Erro de SQL: " + e.getMessage());
+        }
+
+        // Retorna a lista de Contatos encontrados no banco de dados.
+        return resultado;
+    }
+
+    public Aluno getAlunoPorID( int codigo ) {
+        Aluno aluno = new Aluno();
+        try {
+            String sql = "SELECT * FROM contato WHERE id = ?";
+            PreparedStatement ps = conexao.prepareStatement(sql);
+            ps.setInt(1, codigo);
+
+            ResultSet rs = ps.executeQuery();
+
+            if ( rs.next() ) {
+                aluno.setIdAluno(rs.getInt("id"));
+                aluno.setCpf(rs.getString("cpf"));
+                aluno.setNomeCompleto( rs.getString("nome"));
+                aluno.setEmail(rs.getString("email"));
+                aluno.setCelular(rs.getString("celular"));
+                aluno.setLogin(rs.getString("login"));
+                aluno.setSenha(rs.getString("senha"));
+                aluno.setEndereco(rs.getString("endereco"));
+                aluno.setCidade(rs.getString("cidade"));
+                aluno.setBairro(rs.getString("bairro"));
+                aluno.setCep(rs.getString("cep"));
+                aluno.setAprovado(rs.getString("aprovado"));
+
+            }
+
+        } catch( SQLException e ) {
+            System.out.println("Erro de SQL: " + e.getMessage());
+        }
+        return aluno;
+    }
+
+
 }
+

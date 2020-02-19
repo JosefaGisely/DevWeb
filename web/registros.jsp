@@ -121,7 +121,7 @@
             formcontato.nome.focus();
             return false;
         }
-        if(cpf==="" || cpf.length < 4 || cpf.length > 10 ){
+        if(cpf==="" || cpf.length < 4 || cpf.length > 11 ){
             alert("Campo CPF é obrigatório");
             formcontato.cpf.focus();
             return false;

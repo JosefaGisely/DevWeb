@@ -61,7 +61,7 @@ public class AlunoDao{
 
     public boolean excluir( int id ) {
         try {
-            String sql = "DELETE FROM contato WHERE id = ?";
+            String sql = "DELETE FROM aluno WHERE id = ?";
             PreparedStatement ps = conexao.prepareStatement(sql);
             ps.setInt(1, id);
             ps.execute();
@@ -80,10 +80,10 @@ public class AlunoDao{
             // para o BD
             Statement stmt = conexao.createStatement();
             // Armazena o resultado do comando enviado para o banco de dados
-            ResultSet rs = stmt.executeQuery("select * from contato");
+            ResultSet rs = stmt.executeQuery("select * from aluno");
             // rs.next() Aponta para o próximo registro do BD, se houver um
             while( rs.next() ) {
-                //Cria o objeto da classe Contato para armazenar os dados
+                //Cria o objeto da classe aluno para armazenar os dados
                 //que vieram do BD
                 Aluno aluno = new Aluno();
 
@@ -107,14 +107,14 @@ public class AlunoDao{
             System.out.println("Erro de SQL: " + e.getMessage());
         }
 
-        // Retorna a lista de Contatos encontrados no banco de dados.
+        // Retorna a lista de Alunoa encontrados no banco de dados.
         return resultado;
     }
 
     public Aluno getAlunoPorID( int codigo ) {
         Aluno aluno = new Aluno();
         try {
-            String sql = "SELECT * FROM contato WHERE id = ?";
+            String sql = "SELECT * FROM aluno WHERE id = ?";
             PreparedStatement ps = conexao.prepareStatement(sql);
             ps.setInt(1, codigo);
 

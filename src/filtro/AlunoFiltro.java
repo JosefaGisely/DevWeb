@@ -27,7 +27,7 @@ public class AlunoFiltro implements Filter {
             }
         }
         HttpServletResponse httpResponse = (HttpServletResponse) response;
-        httpResponse.sendRedirect("../../index.html");
+        httpResponse.sendRedirect("../../index.jsp");
     }
 
 
